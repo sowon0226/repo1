@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #image1 {
+            border: 1px solid red;
+            height: 250px;
+            
+            /*
+             배경을 이미지로 바꾸기
+             기본 값이 상하좌우로 반복 됨
+            */
+            background-image: url("http://poiemaweb.com/img/bg/dot.png");
+           /*
+           padding 영역까지 적용된다
+           */
+            padding: 20px;
+            margin: 20px;
+        }
+        #image2 {
+            border: 1px solid red;
+            height: 250px;
+            background-image: url("http://poiemaweb.com/img/bg/dot.png");
+           /*x축으로만 반복*/
+            /* background-repeat: repeat-x;*/
+          /* background-repeat: repeat-y;*/
+          background-repeat: no-repeat;/* 하나만 쓰고 싶을 때(반복x)*/
+        }
+        #image3 {
+            border: 1px solid red;
+            height: 250px;
+            background-image: url(http://poiemaweb.com/img/bg/stock-photo-125979219.jpg);
+            /* 가로 세로 순으로 px도 가능*/
+            /*background-size: 50% 100%;*/
+            /*cover는 모든 배경을 원본 비율을 유지하면서 덮어준다
+              안보이는 그림의 영역이 있을 수 있다
+              채워주는게 목적이다
+            */
+            /*background-size: cover;*/
+            background-size: contain;
+            /*
+            원본 비율을 유지하면서 이미지를 모두 표시
+            배경이미지가 없는 영역이 있을 수 있다
+            남은 영역에 repeat 기본 값이 적용 된다           
+            */
+            background-repeat: no-repeat;
+
+            background-position: center;
+        }
+        #image4 {
+            height: 100px;
+            background-color: darkgreen;
+        }
+        /* background: color || image || repeat || attachment || position 
+     ex) background: #FFEE99 url("http://poiemaweb.com/img/bg/dot.png") no-repeat center; 로 쓸 수 있다
+    size는 background-size로 사용해야함*/
+    </style>
+</head>
+<body>
+    <div id="image1">
+        <h3> 24.05.16</h3>
+    </div>
+    <div id="image2">
+        <h3> 24.05.16</h3>
+    </div>
+    <div id="image3">
+        <h3> 24.05.16</h3>
+    </div>
+    <div id="image4">
+        <h3> background-color</h3>
+    </div>
+</body>
+</html>
