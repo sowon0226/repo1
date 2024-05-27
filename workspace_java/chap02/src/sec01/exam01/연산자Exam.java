@@ -125,7 +125,75 @@ public class 연산자Exam {
 	    System.out.println(left); //결과 : 멜론
 	    System.out.println(right); //결과 : 수박
 	    
+	    //비교연산자 연습
+	    System.out.println(3 > 5);
+	    boolean bool = 3 > 5;
+	    System.out.println(bool);
 	    
+	    System.out.println(0.1 == 0.1f); // 결과 false
+	    //같은 타입으로 변경해서 비교하자
+	    System.out.println((float)0.1 ==  0.1f);
+	    
+	    //같다 , 아니다 비교 연산 연습
+	    System.out.println("3 == 3 :" + (3 == 3));
+	    System.out.println("3 != 3 :" + (3 == 3));
+	    
+	    //string비교 연산 연습
+	    String str1 = "김소원";
+	    String str2 = "김소원";
+	    //System.out.println(str1 == str2);
+	    //글씨 비교는 == 사용 금지 
+	    //string 변수나 ""에 .equals() 붙여거 사용 ()안에 글씨와 비교
+	    
+	    System.out.println(   str1.equals(str2)    );
+	    
+	    //논리 연산자 종류 (비교)연습 (비트연산자)	
+	    /*
+	     *  true  &&  falae
+	     * 8421
+	     * 1010 (2) == 10
+	     * & , | //각각 사용해봄
+	     * 0101 (2) == 3 
+	     */
+	    System.out.println(   10 & 3    );
+	    System.out.println(   10 | 3    );
+	    
+	    
+	    //논리연산자
+	    int i1 = 3;
+	    int i2 = 5;
+	    int i3 = 7;
+	    
+	    System.out.println("i3가 가장 큰 값인가?"+( ( i3 >= i1) && (i3 >= i2) )  );
+	   
+	    
+	    //삼항연산자 연습
+	    boolean i4 = i3 > i2;
+	    System.out.println(   i4 ? "i3이 크다" : "i3이 작거나 같다" );
+	    
+	    //p.150 문제 5번
+	    //int var1 = 5;
+	    //int var2 = 2;
+	    //double var3 = var1 * var2;
+	    //int var4 = (int)(var3 / var2);
+	    //System.out.println(var4);
+	    // 기호 바꿈
+	    
+	    int var1 = 5;
+	    int var2 = 2;
+	    double var3 = var1 / var2;
+	    System.out.println("var3 :" + var3);
+	    int var4 = (int)(var3 * var2);
+	    System.out.println(var4);
+	    
+	    
+	    //p.151 문제 6번
+	    //int value =356;
+	    //System.out.println(value - 56);
+	    //356 - 56을 함
+	    int i5 =356;
+	    //System.out.println(  (i5 / 100) * 100  );
+	    System.out.println(  i5 - (i5 % 100)  );
 	    
 	}
 
