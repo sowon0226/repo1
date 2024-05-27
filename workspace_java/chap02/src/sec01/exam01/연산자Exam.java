@@ -104,15 +104,27 @@ public class 연산자Exam {
 	    int rl =v % s;
 	    int h =1;
 	    System.out.println("일원짜리 : "+ (rl / h));
-	    System.out.println("나머지 : "+ (rl % h));
+	    System.out.println("나머지 : "+ (rl % h
+	    		));
 	    
 	    // 숙 제 
 	    String left = "수박";
 	    String right = "멜론";
+	    String sw = left ;
+	    
+	    
+//	    System.out.println(left);
+//	    System.out.println(right);
+	    
+	    left = right ;
+	    right = sw ;
+	   
 	    
 	    // 단, left = "멜론" 금지
+	    		
 	    System.out.println(left); //결과 : 멜론
 	    System.out.println(right); //결과 : 수박
+	    
 	    
 	    
 	}
