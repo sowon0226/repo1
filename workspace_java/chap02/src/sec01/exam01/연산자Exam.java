@@ -118,7 +118,13 @@ public class 연산자Exam {
 	    
 	    left = right ;
 	    right = sw ;
-	   
+	    
+	    // 선생님 답
+	    //swap 문제
+//	    String table = left;
+//	    left = right;
+//	    right = table;
+	    		
 	    
 	    // 단, left = "멜론" 금지
 	    		
@@ -174,15 +180,17 @@ public class 연산자Exam {
 	    //p.150 문제 5번
 	    //int var1 = 5;
 	    //int var2 = 2;
-	    //double var3 = var1 * var2;
-	    //int var4 = (int)(var3 / var2);
+	    //double var3 = var1 / var2;
+	    //int var4 = (int)(var3 * var2);
 	    //System.out.println(var4);
-	    // 기호 바꿈
+	    // 기호 바꿈 double /를 *로 ,
+	    // var3 * var2 를 var3 / var2로
 	    
 	    int var1 = 5;
 	    int var2 = 2;
-	    double var3 = var1 / var2;
+	    double var3 = var1 / var2;   //예상 2.5 
 	    System.out.println("var3 :" + var3);
+	    //출력은 2.0으로 나옴
 	    int var4 = (int)(var3 * var2);
 	    System.out.println(var4);
 	    
@@ -194,6 +202,7 @@ public class 연산자Exam {
 	    int i5 =356;
 	    //System.out.println(  (i5 / 100) * 100  );
 	    System.out.println(  i5 - (i5 % 100)  );
+	    
 	    
 	}
 
