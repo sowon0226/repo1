@@ -129,7 +129,7 @@ public class Arrayxam {
 		
 		System.out.println(천안); // [[I@9e89d68
 		System.out.println(천안[0]); // [I@3b192d32 @안쪽으로 무언가 있다는 뜻
-		System.out.println(천안[0][0]); // o
+		System.out.println(천안[0][0]); // 0
 		
 		int[] 클래스1 = 천안[0];
 //		int 학생1 = 클래스1[0];  또는  
