@@ -1,5 +1,7 @@
 package chap05;
 
+import java.util.Scanner;
+
 public class 배열실습Exam {
 
 	public static void main(String[] args) {
@@ -48,12 +50,37 @@ public class 배열실습Exam {
 				System.out.println(a1[i]);
 		}
 			// 2. 첫번째 자리에 0 넣기 {0, 1, 5, 2, 4}
-			int[] b = new int[a.length];
-			b = new int[b.length + 1];
-			for(int i = 0; i < b.length; i++) { 
-				b[i] =a[i];
+			int[] a2 = new int[4];
+			a2[0] = 1;
+			a2[1] = 5;
+			a2[2] = 2;
+			a2[3] = 4;
+			int[] a3 = new int[a2.length];
+			a3 = new int[a2.length + 1];
+			for(int i = 0; i < a2.length; i++) { 
+				a3[i+1] = a2[i];
 			}
-			b[0] = 0; 	
+			a3[0] = 0;
+			System.out.println();
+			for(int i = 0; i < a3.length; i++) {
+				System.out.print(a3[i]);
+			}
+			// 3. 마지막 숫자를 첫번째에 넣기(회전하는 느낌) {4, 1, 5, 2}
+			
+	    //     배열의 예 {3, 4, 7, 5, 1, 4, 6, 4, 5}		
+			// 4. 홀/짝수의 각각 개수를 출력
+			// 5. 주어진 수(예를 들어 4)보다 큰 숫자의 개수
+			int[] array = {3, 4, 7, 5, 1, 4, 6, 4, 5};
+			Scanner scan = new Scanner (System.in); // 이해 못함
+			int b = scan.nextInt();
+			int count = 0;
+			for(int c = 0; c <array.length; c++) {
+				if(b < array[c]) {
+					count++;
+				}
+				System.out.println(array.length);
+			}
+			
 	}
 
 }
