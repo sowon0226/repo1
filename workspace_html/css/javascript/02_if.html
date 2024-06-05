@@ -28,6 +28,7 @@
              // 온도를 입력 받아요.
             //let temp = prompt("온도 입력"); // d가 String  // prompt 숫자 입력하는것 (java에서 사용하는 scanner같은것)
             // 받은 값은 String이라서 Number()를 사용해 숫자로 바꿔주세요
+            let temp = -4
             temp = Number(temp);
               // 입력받은 온도에 따라서
             // 1. '영하입니다.', '영상입니다.' 출력 (0도는 영하)
@@ -46,6 +47,7 @@
             //       이번에 입력 받은 온도를 이용해서   (2)
             //       '어제보다 5도 높습니다'
             //let twmp2 = prompt("두번째 온도 입력");
+            let temp2 = -8
             temp2 = Number(temp2);
             // 3, 5 : 2도 높습니다 3 - 5 == -2
             // 5, 1 : 4도 낮습니다 5 - 1 == 4
@@ -79,7 +81,7 @@
             let num = 88;
             let num10 = num / 10;
             num10 = parseInt(num10);
-            console.long("num10 : " + num10);
+            console.log("num10 : " + num10);
 
             let num1 = num %10;
             console.log("num1 : " , num1);
@@ -181,6 +183,50 @@
             document.write("<h1>write</h1>");  // 잘 안씀 책에 나와서 사용해봄
 
             // switch에서는 defult를 사용해주는 것이 좋음
+
+            a = 9;
+            // 만약에
+            // a가 10보다 크거나 20보다 작고
+            // a가 홀수여야 한다
+            /*
+                 &&가    || 보다 우선순위가 높다
+                논리곱  논리합
+            */
+            // 좋은 예제 아님.
+            if( (a > 10 || a < 20 ) && a%2 == 1 ) {  // 60 > a > 50 이라고 쓰면 안됨
+                console.log('참')
+            }
+            //else {
+            // else는 if 조건의 정반대    
+            if ( !((a > 10 || a < 20 ) && a%2 == 1) ) {
+                console.log('거짓')
+            }
+            if ( a > 10 && a <20 ){
+            }
+            
+            // 정반대 조건
+            if ( !(a > 10 && a <20) ){
+            }
+
+            // 느낌표 없애기
+            // 분배 법칙
+            // 원리 : 모든걸 빠짐없이 반대로 적용
+            if( a <= 10 || a >= 20 ){
+
+            }
+            
+            // &&만 있는 경우
+            // 결론 : false를 만날때 까지만 실행
+            if( a > 1 && a > 5 && a > 10 ){
+
+            }
+            // int[] b = null;
+            // if( true && true && false && b.length > 0 ){
+            //          b != null 아닐 때
+            // }
+
+            // ||만 있는 경우
+            // 결론 : true를 만날때 까지만 실행
         </script>
     </head>
     <body>
