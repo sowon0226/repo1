@@ -47,13 +47,30 @@ public class 배열실습Exam {
 			for(int i = 0; i < a1.length; i++) {
 				System.out.println(a1[i]);
 		}
-			// 2. 첫번째 자리에 0 넣기 {0, 1, 5, 2, 4}
-			int[] b = new int[a.length];
-			b = new int[b.length + 1];
+		//	   첫번째 자리에 0 넣기 {0, 1, 5, 2, 4}	
+			int[] b = new int[4];
+			b[0] = 1;
+			b[1] = 5;
+			b[2] = 2;
+			b[3] = 4;
+			
+			int[] b1 = new int[b.length];
+			b1 = new int[b.length + 1];
 			for(int i = 0; i < b.length; i++) { 
-				b[i] =a[i];
+				b1[i] = b[i];
 			}
-			b[0] = 0; 	
+			b1[0] = 0;
+			for(int i = 0; i <b1.length; i--) {
+				int num = b1[i];
+				System.out.println(num);
+			}      
+		//	   3. 마지막 숫자를 첫번째에 넣기(회전하는 느낌) {4, 1, 5, 2}
+			
+		//	   4. 홀/짝수의 각각 개수를 출력
+			
+		//     5. 주어진 수(예를 들어 4)보다 큰 숫자의 개수	
+			//int[] Array = [3, 4, 7, 5, 1, 4, 6, 4, 5];
+		//	   6. 두번째 최대값
 	}
 
 }
