@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "captain">
+       <span> 당선을   </span>     <span>      축하드립니다</span>    
+    </div>
+
+    <script>
+        let cap = document.querySelector('#captain'); // [id=captain]을 #captain으로 씀
+        // textContent : html 소스 그대로 나옴
+        let textContent = cap.textContent; 
+        console.log('textContent', textContent); 
+
+        // innerText : 화면에 보이는 대로 가져옴
+        //             브라우저가 계산을 끝내고 실제로 표시한대로
+        let innerText = cap.innerText;
+        console.log('innerText',innerText);
+
+        // innerHTML : html 내용의 소스 전부다
+        let innerHTML = cap.innerHTML;
+        console.log('innerHTML',innerHTML);
+
+        // 둘다 글씨를 바꿔주는데 tag도 그냥 글씨로 인식한다
+        cap.textContent = "<h1>a</h1>  b   c";
+        cap.innerText = "<h1>a1</h1>  b1   c1";
+
+        cap.innerHTML =  "<h1>a</h1>  b   c";
+        // cap.innerHTML =  "&lt; a &gt;";
+        
+    </script>
+</body>
+</html>
