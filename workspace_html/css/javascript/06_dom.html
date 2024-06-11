@@ -25,6 +25,7 @@
         <div id = "wrap">
             <div class = "div2"> 안쪽 div2</div>
             <div class = "div3"> 안쪽 div3</div>
+            <input type = "text" name = "addr">
         </div>
 
         <div id = "two" class = "div3 div2">div2</div>
@@ -71,8 +72,12 @@
         // parent_wrap : id가 wrap인 요소
         // #wrap.div2
         //let child_div2 = document.getElementById("wrap").getElementsByClassName("div2");
-        let child_div2 = wrap.getElementsByClassName("div2");
+        let child_div2 = paren_wrap.getElementsByClassName("div2");
         console.log(child_div2);
+
+        // getElementByName : 이제 못쓰는 언어임 없어짐
+        // let names = paren_wrap.getElementByName("addr");
+        // console,log(names);
 
         // css 선택자로 선택하는 방법
         let css_title = document.querySelector("#title");
@@ -121,7 +126,9 @@
         // class 중에서 div3삭제
         two.classList.remove("div3");
         // console.log("two")
-        // alert(123)
+
+        // alert(123) 
+
         // toggle 없으면 있게, 있으면 없게 만드는것
         two.classList.toggle("div5");  // 스위치 같은 느낌  
         two.classList.toggle("div5");
@@ -152,7 +159,7 @@
         console.log(isClass);
 
         // 해당 속성의 값을 가져오는 방법
-        let id = two.getAttribute('id');
+        let id = two.getAttribute('id'); // getAttribute : 속성의 값을 알려줌
         console.log(id);
 
         // 없으면 null
@@ -167,6 +174,7 @@
         two.removeAttribute('data-human');
 
         console.log(document); // 문서 전체가 나옴
+
 
 
     </script>
