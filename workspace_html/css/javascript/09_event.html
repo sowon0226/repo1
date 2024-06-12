@@ -5,15 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>      
+        #cursor {            
+            width: 30px;           
+            height: 33px;              
+            position: absolute;             
+            top: 0;             
+            left: 0;              
+            display: none; 
+             }    
+                
+        #catTower {             
+            border: 1px solid red;             
+            width: 300px;            
+            height: 500px;             
+            margin: 50px;         
+            }     
+    </style>         
     <script>
 
+            const owner_id = 'admin';
+
+
+            function btn2click() {
+                document.querySelector("#console").innerHTML = '버튼2 클릭<br>';
+            }
+
+
+
+        // let btn1 = document.querySelector("#btn1");
+        // console.log('btn1 :', btn1);
 
         function btn2cilck() {
             document.querySelector("#console").innerHTML = '버튼2 클릭<br>';
         }
         // let btn1 = document.querySelector("#btn1");
         // console.log('btn1 :',btn1);
-
+        // window : 브라우저를 뜻함
+        // window.addEventListener("load",)
         window.onload = function () {
             let btn1 = document.querySelector("#btn1");
             console.log('btn1 :', btn1);
@@ -108,34 +137,147 @@
 
             // 선생님코드
             
-            
-            // document.querySelector('#login').addEventListener('click', function (event) {
-            //     console.log('로그인 버튼 클릭')
+            // document.querySelector("#login").addEventListener('click', function (event) {
+            //     console.log('로그인 버튼 클릭');
             //     let id = document.querySelector("#id").value;
             //     console.log("아이디 : ", id);
             //     // document.querySelector("#id").value = "admin";
-            //     let pw = document.querySelector("#id").value;
+            //     let pw = document.querySelector("#pw").value;
             //     console.log("비번 : ", pw);
 
-            //     if(id == 'admin' && pw == '1234'){
+            //     if( id == 'admin' && pw == '1234' ){
             //         document.querySelector("#console").innerHTML = "로그인 성공";
-            //     } else{
+            //     } else {
             //         document.querySelector("#console").innerHTML = "아이디 또는 비밀번호를 확인해 주세요";
             //     }
 
-            //     console.log('id ==""',id == "",id.trim().length)
-            //     if(id == "") {
-            //         document.querySelector('#console').innerHTML += '<br> 아이디는';
+            //     console.log('id == ""', id == "", id.trim().length)
+            //     if(id == ""){
+            //         document.querySelector("#console").innerHTML += '<br>아뒤는 필수임'
 
-            //         document.querySelector('#msg').innerText = "아이디는 필수입니다";
-            //         document.querySelector('#msg').style.display = 'block';
+            //         document.querySelector("#msg").innerText = "아뒤는 필수임";
+            //         document.querySelector("#msg").style.display = 'block';
             //     }
             //     if(pw == ""){
-            //         document.querySelector('#console').innerHTML += '<br>비밀번호는 '
+            //         document.querySelector("#console").innerHTML += '<br>비번은 필수임'
             //     }
-            // })
-        }
 
+            //     document.querySelector("#console").innerHTML = id;
+            // })
+
+
+        /*  버튼3에 
+            마우스가 들어갔을때(hover)
+            font-size를 20px로
+            마우스가 나갔을때
+            14px로 변경
+        */
+            // id가 btn3인 dom(html 태그)를 가져와서 변수에 담기
+            let newBtn3 = document.querySelector("#btn3");
+            newBtn3.addEventListener('mouseover', function(){
+                console.log('마우스 들어옴')
+                newBtn3.style.fontSize = 20 + 'px';
+            });
+            newBtn3.addEventListener('mouseout', function(evt){
+                console.log('마우스 나감')
+                newBtn3.style.fontSize = 14 + 'px';
+            })
+
+            // 앞에 아무것도 안쓰면 브라우저 전체에 적용되는 이벤트
+            addEventListener('mousemove', function(evt){
+                // console.log('마우스 움직임')
+            })
+
+            let catTower = document.querySelector('#catTower');
+            catTower.addEventListener('mousemove', function(evt){
+                // console.log('마우스 움직임')
+                // 화면에 보이는 영역 기준 x, y
+                
+                // 스크롤이 내려 왔더라도 그냥 지금 보이는 왼쪽 위 기준
+                // console.log(evt.x, evt.clientX)
+                
+                // 스크롤에 관계없이 문서 좌상단 기준
+                // console.log(evt.pageX)
+                
+                // 이벤트가 적용된 대상의 좌상단 기준
+                // console.log(evt.offsetX)
+
+                /*
+                    event.pageX를 left
+                    event.pageY를 top
+                    display를 보이게 해주기
+                */
+               let cursor = document.querySelector("#cursor");
+               cursor.style.left = evt.pageX + 'px';
+               cursor.style.top = evt.pageY + 'px';
+               cursor.style.display = "block";
+            })
+
+            // 이벤트 명 : focus, blur
+            // #id에 적용해서
+            // focus : "아이디에 포커스 맞춰짐"
+            // blur : "아이디에 포커스 잃음"
+            let newId = document.querySelector("#id");
+            newId.addEventListener("focus", function(){
+                console.log("아이디에 포커스 맞춰짐")
+            })
+            newId.addEventListener("blur", function(){
+                console.log("아이디에 포커스 잃음")
+            });
+
+            // this : 그냥 쓰일때는 window 객체를 가지고 있다
+            console.log(this); // addEventListener 안에서의 this는 이벤트로 인식
+
+            document.querySelector("#parent").addEventListener("click", function(event){
+
+
+                // event.tatget : 이벤트가 발생 된 DOM
+                console.log('event.target :', event.target);
+                // event.currentTarget : 이벤트가 적용 된 DOM
+                console.log('event.currentTarget :', event.currentTarget);
+
+                // this : 더이상 window가 아님
+                // this === event.currentTarget 같음 (addEventListenenr 안에서만 같은 의미 !)
+                console.log('this :',this);
+
+            }); // 
+
+            document.querySelector("#child1")
+            .addEventListener("click", function(event){
+
+                // 부모로 전달되는 이벤트를 중지한다
+                event.stopPropagation(); 
+
+                console.log('자식1 클릭');
+            });
+
+            /*
+             <form id = "from" action ="http://search.naver.com/search.naver">
+            <input id ="keyword" tyrp = "text" name = "query">
+            <input type = "submit" value="네이버 검색">
+            </form>
+            */
+            document.querySelector("#from")
+            .addEventListener("submit", function(event){
+
+                // 원래 html 고유 기능을 없애줌
+                event.preventDefault();  // 기본 기능을 막는다
+
+                let value = document.querySelector("#keyword").value;
+                console.log(value, value.length);
+                if(value.length < 2){
+
+                    console.log('두글자 이상 입력');
+                    
+                }else {
+                    console.log('naver 검색');
+                    // 검색을 막아도 검사창에 document.querySelector("#from").submit(); 치면 들어갈 수 있음
+                    document.querySelector("#from").submit();
+                }
+            });
+            
+            
+        }
 
     </script>
 </head>
@@ -155,6 +297,24 @@
     </div>
 
     <div id="console"></div>
+
+    <img id="cursor" src="https://cdn.discordapp.com/attachments/1237222207395205138/1250271715414773780/image.png?ex=666a55c5&is=66690445&hm=db0a7d03382cf6c77bf7b73d4ebf377622d4bdcb293fa8f51512be88965cb450&">
+    <div id="catTower">
+
+    </div>
+   
+    <div id = "parent">
+        부모
+        <div id = "child1">자식 1</div>
+        <div id = "child2">자식 2</div>
+    </div>
+    <!-- <a href = "http://naver.com" id = "naver">네이버</a> -->
+
+    <form id = "from" action ="http://search.naver.com/search.naver">
+        <input id ="keyword" tyrp = "text" name = "query">
+        <input type = "submit" value="네이버 검색">
+    </form>
+    
 </body>
 
 </html>
