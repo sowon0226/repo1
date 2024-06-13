@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // * 외워야 하는것
+        //  pusf, pop, shift, unshift, sort, splice(알아두면 좋음)
+        //  join, slice
+
+        // 배열은 변수들의 집합이다. java에서 배워서 넘어감
+
+        // 배열 변수로 만드는 가장 쉬운 방법
+        let arr = [];
+        let arr2 = new Array(); // 두번째 방법
+
+        // 값을 알고 있을 때 배열 만들기
+        arr = [1, 2, 3];
+        arr = new Array(1, 2, 3);
+
+        console.log('arr[0]', arr[0]);
+        arr[1] = 20;
+        console.log('arr[1]', arr[1]);
+
+        console.log('arr[10]', arr[10]); //
+        arr[10] = 5;
+        console.log('arr[9]', arr[9]);
+        console.log('arr[10]', arr[10]);
+
+        console.log(arr);  // 결과 : (11) [1, 20, 3, empty × 7, 5]
+        console.log('arr : '+ arr); // 결과 :  1,20,3,,,,,,,,5 문자로 만들어줌  ? (+와 ,는 결과가 다름 ? )
+        console.log('arr : ', arr); // 결과 : (11) [1, 20, 3, empty × 7, 5] (11)은 사이즈
+        
+        
+        // index에 아무거나 넣을 수 있는데 숫자가 아닌 경우
+        // 배열의 길이에 영향을 주지 않음
+        arr['참'] = true; // [] 문자를 넣고 문자로 찾아서 쓸수 있음
+        arr['참2'] = true;
+        console.log(arr);
+        console.log(arr[97]);
+        
+        // indax가 있는것만 출력
+        // 참 도 출력됨
+        for(let i in arr){
+            console.log(i);
+        }
+        
+        // 문자열도 *접근만* 배열처럼 사용 가능
+        // 언어마다 한글의 사이즈가 다르게 표현할 수 있음
+        let str = '휴먼교육센터'; // 6이 나온 이유 : 언어 수
+        console.log('str.length', str.length);
+        console.log('str[0]', str[0]);
+        
+
+        // 배열 Array의 매소드 (함수)
+
+        arr = [0, 3, 1, 4, 5, 2];
+
+
+        console.log(arr.length);
+        // 마지막에 하나 추가
+        // 자동으로 사이즈도 늘어남
+        arr.push(100);     
+        console.log(arr);  
+        
+        // 마지막 값이 100이였는데
+        // pop() : 마지막 값을 지우고 그 값을 돌려주는 역할을 수행
+        //원본 배열에서 마지막 값은 사라진다
+        
+        //arr.pop(); 받는 변수가 없으면 지워지고, 있으면 돌려줌
+        let pop = arr.pop();
+        console.log('arr', arr);
+        console.log('pop', pop);
+        
+        // unshift : 맨 처음에 하나 추가
+        // 사이즈 늘어남
+        arr.unshift(-1); // 결과 : [0, 1, 2, 3, 4, 5] >>>>>>> [-1, 0, 1, 2, 3, 4, 5] -1를 맨 처음에 추가
+        console.log(arr);
+
+        // shift : 맨 처음 값을 제거하고, 제거된 값을 반환
+        // 지금 현재 첫번째 값은 -1
+        let shift = arr.shift();
+        console.log('arr', arr); // 결과 : [-1, 0, 1, 2, 3, 4, 5] >>>>>> [0, 1, 2, 3, 4, 5] 맨 처음 값이 제거됨
+        console.log('shift', shift); // 결과  : shift -1 맨 처음 값만 가져옴 ?
+
+        // arr : [-1, 0, 1, 2, 3, 4, 5, 100]
+        // arr.pop()  // 배열 마지막 값을 지우기
+        // arr : [-1, 0, 1, 2, 3, 4, 5]
+        // arr.shift() // 배열 맨 처음 값을 지우기
+        // arr : [0, 1, 2, 3, 4, 5]
+            
+        // 배열을 거꾸로 순서 바꾸기
+        arr.reverse();
+        console.log('arr', arr); // 결과 : [0, 1, 2, 3, 4, 5] >>>>>> [5, 4, 3, 2, 1, 0] 거꾸로 뒤집기
+
+        // 정렬해줌, 대신에 오름 차순만 지원
+        arr.sort(); // 결과 : [0, 3, 1, 4, 5, 2] >>>>> [0, 1, 2, 3, 4, 5] 오름 차순
+        console.log('arr', arr);
+        
+
+        // arr : 0, 1, 2, 3, 4, 5
+        // 시작 index, count
+        //arr.splice(2, 3);  // index(2)부터 시작해서 count(2, 3, 4)3개를 지운다는 의미 
+        let arr3 = arr.splice(2, 3);  // 변수를 지정해주면 지운 값만 돌려줌
+        console.log('arr3', arr3);
+        console.log('arr', arr);
+
+        // arr : 2, 3, 4
+        // 시작 index만 있는 경우 거기서부터 끝까지 지움
+        arr3 = arr.splice(1);  // 결과는 index(1)만 보여줌
+        console.log('arr3', arr3); 
+        console.log('arr', arr);
+
+        arr = [10, 30, 20, 50, 40, 50];
+
+        arr3 = arr.splice(-4, 2); // 뒤에서부터 네번째 2개만 지워짐
+        console.log('arr3', arr3); // 지워진 값을 표시 (20, 50)
+        console.log('arr', arr); // 지우고 남은 값만 표시
+
+        // arr : [10, 30, 40, 50]
+        arr.splice(1, 2, '3', '4', '5'); // [10, 30, 40, 50]에서 30, 40을 지우고 그 자리에 '3, 4, 5'을 넣어라
+        console.log('arr3', arr3); 
+        console.log('arr', arr); // 결과 : [10, '3', '4', '5', 50]
+
+        // arr : [10, '3', '4', '5', 50]
+        arr3 = arr.splice(1, 0, '일') // 첫번째 index 뒤에 지우지 않고 (일)값 추가 
+        console.log('arr3', arr3);
+        console.log('arr', arr);
+
+        // arr : [10, '일', '3', '4', '5', 50] 
+
+        // fill: 채우고 싶은 값, 시작 index, 종료index 바로 앞까지 채워줌
+        let arr4 = [0, 1, 2, 3, 4];
+        //arr4.fill(8)  // 모두다 8로 바꿈
+        //arr4.fill(8, 1)  //1번 index부터 끝까지 8로 바꿈
+        arr4.fill(8, 1, 3);  //1번 index부터 3번index 바로 앞까지 8로 바꿈
+        console.log(arr4); 
+        // arr4 : [0, 8, 8, 3, 4]
+
+        // 원본을 그냥 두는 함수
+        
+        // join : 배열 모두를 글씨로 바꿔주는데
+        //        사이사이에 특정 문자를 넣어줄 수 있다 (배열이 없어지고 하나의 문장으로 ? )
+        //        특정 문자의 기본 값은','          
+        // arr : [10, '일', '3', '4', '5', 50]
+        let str2 = arr.join(); 
+        console.log('str2', str2); // 결과 : [10, '일', '3', '4', '5', 50] >>>>> 10,일,3,4,5,50 문자열로 바뀜
+        console.log('arr', arr); // arr은 안바뀜
+
+        str2 = arr.join("-");
+        console.log('str2', str2); // 결과 : 10-일-3-4-5-50
+
+        // str2 : 10-일-3-4-5-50
+        // split : 특수문자로 구분되는 문자열을 잘라서 배열로 만들어줌
+        //         특수문자는 사라짐
+        arr3 = str2.split('-');  // ['10', '일', '3', '4', '5', '50'] >>>>> 10-일-3-4-5-50 배열로 바뀜
+        console.log('arr3', arr3);
+        // arr3 : ['10', '일', '3', '4', '5', '50']
+
+        console.log(new Date().toISOString());
+        // 2024-06-05T03:44:25.211Z
+
+        // arr : ['10', '일', '3', '4', '5', '50']
+        
+        console.log(arr)
+        // slice : 시작 index부터 종료 index 앞까지만 복사해옴
+        arr3 = arr.slice(2, 5);
+        console.log('arr3', arr3);
+        console.log('arr', arr);
+
+        // concat : 배열을 합쳐 준다
+        let arr5 = ['a', 'b', 'c'];
+        arr3 = arr.concat(arr5); // ['10', '일', '3', '4', '5', '50']  >>>>> [10, '일', '3', '4', '5', 50, 'a', 'b', 'c']
+        console.log('arr3', arr3); 
+        console.log('arr', arr);
+
+        str = arr.toString();
+        console.log(str);
+        console.log(""+ arr);
+
+        // arr : ['10', '일', '3', '4', '5', '50']
+        // indexOf : 해당되는 값이 어느 index에 있는지 알려줌
+        console.log( arr.indexOf('3')); 
+        //           값이 없으면 -1로 알려줌
+        console.log( arr.indexOf('100')); 
+        // 맨 앞에서 처음 같은 값이 나옴 index출력
+        arr.push('3');
+        console.log( arr.indexOf('3')); 
+
+        // lastindexOf : indexOf와 반대
+        
+     </script>
+</head>
+<body>
+    
+</body>
+</html>

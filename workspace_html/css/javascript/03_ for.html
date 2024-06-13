@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //let i = 0;
+        //let j = 0; 
+        let i = 0, j = 0; // 두가지를 한번에 쓸 때 ' , '를 쓴다 (모르면 안쓰는게 낫다)
+        for(let i = 0, j = 0; i < 3; i++, j-=2){
+            console.log(i);
+        }
+
+        // 옛날 for문 java에서 사용하는 ?
+        let arr = [10, 20, 30];
+        console.log(' 옛날 for문')
+        for(let i = 0; i < arr.length; i++){
+            console.log(arr[i]);
+        }
+
+        // in을 for문
+        console.log('for in')
+        // in 앞의 변수에 현재의 index가 저장됨
+        for(let i in arr){  // let i = 변수, in = 객체
+            console.log('i :', i,', arr[i]:', arr[i]);
+        }
+
+        //  값만 중요하다 할 때 사용함
+        console.log('for of');
+        // java에서 향상된 for문
+        for(let i of arr){
+            console.log('i : ', i);
+        }
+
+        // new Set = 중복 값을 제거 후 관리 해줌
+        // 단점 몇번째의 값인지를 모름 
+        // off를 사용해서 중복이 몇번째의 값인지 확인해야함
+
+        // label은 거의 안씀 있다라고만 알고있음 됨
+
+        // contiue는 실행 중 contiue를 만나면 다음 턴으로 넘어감
+        // break는 if문과 상관없이 원하는 값을 찾으면 멈춘다
+
+        //[문제1] 1~10까지 짝수만 출력하기
+        //증감식 이용하기
+        console.log('증감식 이용하기');
+        for(let i = 2; i < 10; i += 2){
+            console.log(i);
+        }
+        console.log(' - if --------------')
+        //if문 이용하기
+        for(let i = 1; i < 10; i++){
+            // if( i % 2 == 1){
+            //     continue;
+            // } else {
+            //     console.log(i);
+            // }
+            if( i % 2 == 1){
+                continue;
+            }
+            console.log(i);   
+        }
+
+        // a = a +1
+
+        //조금 어려운 문제
+        //[문제2] 1~10까지 한줄에 3개씩 출력되게
+        // 1 2 3 
+        // 4 5 6 
+        // 7 8 9 
+        // 10
+        let result = ' ';
+        for(let i = 1; i <=10; i++){
+            result += i; 
+            if(i != 10){
+                result += " , ";
+            }
+            // 3번 마다
+            // 즉, i가 3의 배수일 때 마다
+            if(i % 3 == 0){  // 첫번째 방법, 살패 이유 : 이런 경우는 10은 출력이 안됨 
+                // console.log(result);
+                // result = '';
+                result += '\n' // 두번째 방법
+            }
+            // 10이 출력이 안됨
+            // 왜 : 10은 3의 배수가 아니여서
+            // 어떻게 해결 ?
+            // 남은 개수가 3개보다 적은 경우 그냥 이어서 출력하는 방법도 있겠다
+        }
+        console.log(result);
+
+
+        // 1 ~ 10까지 3, 6, 9만 출력하기
+        console.log('3, 6, 9');
+        for(let i = 3; i < 10; i += 3){
+            console.log(i);
+        }
+        /* 피라미드 4단계
+            +....
+            ++...
+            +++..
+            ++++.
+            +++++
+        */
+        /* 그래서 나는 어떻게 하는가
+            +....
+            + 1개 쓰고 , . 4개 쓰고 , 엔터
+            ++...
+            + 2개 쓰고 , . 3개 쓰고 , 엔터 
+            + 3개 쓰고 , . 2개 쓰고 , 엔터
+            + 4개 쓰고 , . 1개 쓰고 , 엔터
+            + 5개 쓰고 , . 0개 쓰고 , 엔터
+        */
+       result = ''
+        // for(let j = 1; j <= 1; j++){
+        //     // +를 j만큼 출력
+        //     result = result + "+";
+        // }
+        // for(let j = 1; j <= 5-1; j++){
+        //     // .를 j만큼 출력
+        //     result = result + ".";
+        // } 
+        // for(let j = 1; j <= 2; j++){
+        //     // +를 j만큼 출력
+        //     result = result + "+";
+        // }
+        // for(let j = 1; j <= 5-2; j++){
+        //     // .를 j만큼 출력
+        //     result = result + ".";
+        // } 
+
+        let line = 10; // 10으로 바꿔봄
+        for(let i = 1; i <= line; i++){
+            for(let j = 1; j <= i; j++){
+            // +를 j만큼 출력
+            result = result + "+";
+        }
+        for(let j = 1; j <= line-1; j++){
+            // .를 j만큼 출력
+            result = result + ".";
+        } 
+          result += '\n';
+        }
+        console.log(result);
+
+        console.log('-- 구구단 한단씩 옆으로 ----------------' );
+        // 2x1=2 2x2=4.......2x9=18 엔터
+        // result = '';
+        // for(let i = 1; i <= 9; i++){
+        //     result += '2x'+ i +'=' + (2*i) + "\t";
+        // }
+        // console.log(result);
+        // for(let i = 1; i <= 9; i++){
+        //     result += '3x'+ i +'=' + (3*i) + "\t";
+        // }
+        // console.log(result);
+        for(let j = 2; j <= 9; j++){
+            result = '';
+            for(let i = 1; i <= 9; i++){
+                result += j + 'x' + i + '=' + (j*i) + "\t";
+            }
+            console.log(result);
+        }
+
+        console.log('-- 구구단 tp단씩 옆으로 ----------------' );
+
+        // 2x1=2 3x1=3 4x1=4......
+        // 2x2=4 3x2=6 4x2=8......
+
+        // result = ''
+        // for(let i = 2; i <= 4; i++){
+        //     result += `${i}x1=${i*1}\t`
+        // }
+        // console.log(result);
+
+        // result = ''
+        // for(let i = 2; i <= 4; i++){
+        //     result += `${i}x2=${i*2}\t`
+        // }
+        // console.log(result);
+
+        // for(let j = 1; j <= 9; j++){
+        //     result = ''
+        //     for(let i = 2; i <= 4; i++){
+        //     result += `${i}x${j}=${i*j}\t`
+        //     }
+        // console.log(result);
+        // }
+
+        // for(let j = 1; j <= 9; j++){
+        //     result = ''
+        //     for(let i = 5; i <= 7; i++){
+        //     result += `${i}x${j}=${i*j}\t`
+        //     }
+        // console.log(result);
+        // }
+
+        let dan_max = 9;
+        for(let k=2; k<=dan_max; k += 3){
+            for(let j=1; j<=9; j++){
+                result = ''
+                let max = k+2;
+                if(max > dan_max){
+                    max = dan_max;
+                }
+                for(let i=k; i<=max; i++){
+                    result += `${i}x${j}=${i*j}\t`
+                }
+                // for(let i=k; i<=(k+2); i++){
+                //     if(i <= dan_max){
+                //         result += `${i}x${j}=${i*j}\t`
+                //     }
+                // }
+                console.log(result);
+            }
+        }
+
+        console.log('----------- 주사위 모든 조합 -------------' );
+        /*
+         1단계
+         주사위 2개로 굴려서 나올 수 있는 모든 조합을 출력
+        */
+       for(let i = 1; i <= 6; i++){
+        for(let j = 1; j <=6; j++){
+            console.log ( i + " , "+ j);
+        }
+       }
+
+       /*
+        2단계
+        합 별로 나올 수 있는 조합
+        합이 2 : [1,1]
+        합이 3 : [1,2] [2,1]
+       */
+       console.log('----------- 주사위 합 별 조합 -------------' );
+
+       for(let k = 2; k <= 6; k++){
+
+        result = '합이 ' + K + '일때 :';
+        for(let i = 1; i <= 6; i++){
+            for(let j = 1; j <=6; j++){
+                if(i+j == k){
+                         // console.log ( i + " , "+ j);
+                        result += `[${i}, ${j}]`;
+                    }
+                }
+            }
+       console.log(result);
+       }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

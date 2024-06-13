@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #view {
+            color : red;
+            background-color: blue;
+        }
+
+        [name=rad]:checked {
+            transform: scale(2);
+        }
+    </style>
+    <div id = "captain">
+       <span> 당선을   </span>     <span>      축하드립니다</span>    
+    </div>
+    <div id = "view">
+        <span>원래 있던 글씨</span>
+        
+    </div>
+    
+    <div id = "view2">
+        view2
+    </div>
+
+    id : <input type = "password" id = "id" value="미리적은글"><br>
+    <select id = "select">
+        <option value="1">첫번째</option>
+        <option value="2">두번째</option>
+    </select>
+    <br>
+    <input type="radio" name="rad" value="1" checked="checked">라디오1
+    <input type="radio" name="rad" value="2">라디오2
+    <input type="radio" name="rad" value="3">라디오3
+    <script>
+        let cap = document.querySelector('#captain'); // [id=captain]을 #captain으로 씀
+        // textContent : html 소스 그대로 나옴
+        let textContent = cap.textContent; 
+        console.log('textContent', textContent); 
+
+        // innerText : 화면에 보이는 대로 가져옴
+        //             브라우저가 계산을 끝내고 실제로 표시한대로
+        let innerText = cap.innerText;
+        console.log('innerText',innerText);
+
+        // innerHTML : html 내용의 소스 전부다
+        let innerHTML = cap.innerHTML;
+        console.log('innerHTML',innerHTML);
+
+        // 둘다 글씨를 바꿔주는데 tag도 그냥 글씨로 인식한다
+        cap.textContent = "<h1>a</h1>  b   c";
+        cap.innerText = "<h1>a1</h1>  b1   c1";
+
+        cap.innerHTML =  "<h1>a</h1>  b   c"; // 이 방법을 많이 사용함
+        // cap.innerHTML =  "&lt; a &gt;";
+
+        console.log(cap.innerHTML);
+        cap.innerHTML += "<h2>h2</h2>" // 라고 쓸 수 있음, += 사용해서 덮어쓰지 않고 이어서 쓸 수 있다
+
+        // <h3 id = 'subtitle'></h3>
+        let h3 = document.createElement("h3");
+        h3.setAttribute('id','subtitle');
+        h3.setAttribute('style','color : red');
+        h3.innerText = "나중에 추가한 h3";
+
+        let view = document.querySelector('#view');
+
+        // 만들어진 DOM과 글씨를 넣을 수 있다
+        // append : 자식 요소로 마지막에 추가
+        view.append(h3); // append : <span> 맨 뒤에 붙이다
+        
+        view.append("<strong>글씨</strong>"); // 글씨도 추가 할 수 있다, 
+        // DOM만 넣을 수 있다
+        view.appendChild(h3); // append, appendChild 둘 중에 하나만 쓸 수 있다
+        
+        // prepend : 자식 요소로 처음에 붙음
+        view.prepend(h3); 
+
+        // after : 형제로 추가인데 다음에 붙음
+        view.after(h3);
+
+        // before : 이전 형제로 붙음
+        view.before(h3);
+
+        // string을 DOM으로 만드는 방법
+        let html = '';
+        html += "<div>";
+        html +=     "div 안쪽";
+        html +=      "<span>";
+        html +=          "span 안쪽";
+        html +=      "</span>";
+        html += "</div>";
+        
+        // #Document 객체를 생성해서 <html1>부터 싹 만들어 줌
+        let dom = new DOMParser().parseFromString(html,"text/html");
+        let view2 = document.querySelector("#view2");
+        view2.appendChild(dom.documentElement);
+
+        // style이 원래 css값을 저장하고 있지 않다
+        console.log(view.style.color);
+        // javascipt로 저장하는 경우 반영되고 그 값을 저장하고 있다
+        view.style.color = '#fff';
+        console.log(view.style.color);
+
+        // css에서 -로 연결된 문법(캐밥케이스)은 카멜케이스로 변경되었다
+        // background-color >>>>> backgroundColor
+        view.style.backgroundColor = '#000';
+
+        // javascipt의 style로 준 모든걸 덮어쓴다
+        view.style.cssText = 'font-size: 20px; boder: 1px; solid red';
+
+        // from 요소들 input, select, textarea의 값은 .value로 가져온다
+        let input = document.querySelector("#id");
+        console.log(input.value);
+
+        // select된 option의 value를 가져온다
+        let select =document.querySelector("#select");
+        console.log(select.value);
+
+        // css 선택자로 체크 된 것만 가져온다
+        let radio1 = document.querySelector('[name=rad]:checked');
+        console.log(radio1.value);
+
+        // javascript의 프로퍼티  checked를 통해서 알 수 있다
+        let radios = document.querySelectorAll('[name=rad]');
+        for(let i =0; i < radios.length; i++){
+            console.log(radios[i].checked)
+            if(radios[i].checked){
+                console.log('선택', radios[i].value)
+            }
+        }
+        
+    </script>
+</body>
+</html>
