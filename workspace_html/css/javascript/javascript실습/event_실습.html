@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            console.log();
+        let dels = document.querySelectorAll('.del')
+            for(let i = 0; i < dels.length; i++){
+                dels[i].addEventListener('click', function(event){
+                    console.log(event.target);
+                    
+                    event.target.parentNode.remove();
+                });
+            }
+        // 인풋이 가지고 있는 아이디를 쿼리셀렉트로 잡아서 벨루값을 알아야 한다
+        let btn = document.querySelector("#btn")
+        console.log(btn.value);    
+        // btn.value를 이용해서 추가 버튼을 눌렀을 때 쉬기가 추가
+        let list = document.querySelector("#list")
+        let A = document.querySelector(".A")
+        A.addEventListener('click',function(){
+            list.innerHTML += `<div>
+            <input type="checkbox" class="chk"  value="val"> ${btn.value}
+            <button type="button" class="del">삭제</button> <br>
+            </div>`
+            let dels = document.querySelectorAll('.del')
+            for(let i = 0; i < dels.length; i++){
+                dels[i].addEventListener('click', function(event){
+                    console.log(event.target);
+                    
+                    event.target.parentNode.remove();
+                });
+            }
+            console.log(btn.value);
+        });
+        let chk1 = document.querySelector('.chk1')
+            
+                chk1.addEventListener('click', function(event){
+                    let c =  document.querySelectorAll(".chk")
+                    console.log(c)
+                    c[0].checked = true;
+                   // event.target.parentNode.remove();
+                });
+    }
+    </script>
+    <style>
+        .chk:checked + span {
+            text-decoration: line-through;
+        }
+        #list:checked{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div> 할 일 목 록</div>
+    <div><input id="btn" type="text" > &nbsp; <button type="button" class="A">추가</button><br><br></div>
+    <div>
+    <input type="checkbox" class="chk1"  value="udon">전체 선택 &nbsp;
+    <input type="button" id="btn1" value="선택삭제"><br><br>
+    </div>
+    <div>
+    <input type="checkbox" class="chk"  value="val"> <span>&nbsp; 점심 정하기  &nbsp; </span>
+    <button type="button" class="del">삭제</button> <br>
+    </div>
+    <div>
+    <input type="checkbox" class="chk"  value="val"><span> &nbsp; 실습하기  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+    <button type="button" class="del">삭제</button><br>
+    </div>
+    <div>
+    <input type="checkbox" class="chk"  value="val"><span> &nbsp; 쉬기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <button type="button" class="del">삭제</button>
+    </div>
+    <div id="list">
+        
+    </div>
+</body>
+</html>

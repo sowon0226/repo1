@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          #img_main {
+            width: 300px;
+        }
+        #thumbnail {
+            display: flex;
+            width: 300px;
+        }
+        #thumbnail img {
+            width: 100%;
+        }
+    </style>
+     <script>
+         window.addEventListener("load", function () {
+            // 실습 2
+            thumb();
+        });
+        function thumb(){
+            document.querySelector("#thumbnail").addEventListener("click", function(event){ //mousemove 사용가능
+                // console.log(event.target);
+                // console.log( event.target.getAttribute("src") );
+
+                let img_main = document.querySelector("#img_main");
+                img_main.setAttribute('src', event.target.getAttribute("src"));
+            })
+        }
+     </script>
+</head>
+<body>
+    <div>
+        <h2>실습 2</h2>
+        <div>
+            <div>
+                <img id="img_main" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fbff-images.bemypet.kr%2Fmedia%2Fmedias%2Fall%2F174-KakaoTalk_Photo_2023-03-07-23-39-18.jpeg&type=sc960_832">
+            </div>
+
+            <div id="thumbnail">
+                <div>
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA1MjZfMTM2%2FMDAxNjg1MDYyMjU3OTQw.3q7tz3TukfMC6bkRfCxEeyF7JiavPrb6zQpmiAQyjgYg.OlucxyFiTxTUrNOqEu8GbNt3AsMVAuPlRGygusCq9Sog.JPEG.astpo4%2F20230526_093646.jpg&type=sc960_832">
+                </div>
+                <div>
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEyMDlfMTQ4%2FMDAxNjcwNTYwMjc0Njc4.fMwgig6gxxmQ7Fag_bA6VbK8CE1zgBjGsrJ0I-X3vbgg.9dQYyTdaTP0E4pNjtZ753ELgxAM2hk2w7ggPMWOEMncg.PNG.01698553668%2FBATCH_6.png&type=sc960_832">
+                </div>
+                <div>
+                    <img src=" https://search.pstatic.net/common?type=f&size=304x304&quality=95&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fshop.phinf%2Fshop%2F20230628_71%2F1687879246314y6c2Y_JPEG%2F66ACF477-6868-44F4-945F-54A86C06C682.jpeg">
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>

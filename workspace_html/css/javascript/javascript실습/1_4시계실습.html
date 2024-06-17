@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         window.addEventListener("load", function () {
+            // 실습 4
+            time();
+            // 실습 5
+            age();
+        });
+        function time() {
+            let time = document.querySelector("#time");
+            // time은 div이고 그 안에 컨텐츠 영역에 글씨 쓰기
+            time.textContent = 'textContent';
+            time.innerText = 'innerText';
+            time.innerHTML = 'innerHTML';
+
+            time.innerText = '시 : 분 : 초';
+
+            let now = new Date();
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+
+            let hms = h + "시 " + m + "분 " + s + "초";
+            time.innerText = hms;
+
+            // now.toISOString().split("T")[1]
+
+            // // 실시간(1초에 4번) 갱신
+            // setInterval(function () {
+            //     let now = new Date();
+            //     let h = now.getHours();
+            //     let m = now.getMinutes();
+            //     let s = now.getSeconds();
+
+            //     if (s < 10) {
+            //         s = "0" + s;
+            //     }
+
+
+            //     let hms = h + "시 " + m + "분 " + s + "초";
+            //     time.innerText = hms;
+            // }, 1000 / 4)
+
+            time_refresh();
+        }
+        function time_refresh(){
+            // console.log(1)
+            setTimeout(function () {
+                // console.log(2)
+                let now = new Date();
+                let h = now.getHours();
+                let m = now.getMinutes();
+                let s = now.getSeconds();
+
+                if (s < 10) {
+                    s = "0" + s;
+                }
+
+
+                let hms = h + "시 " + m + "분 " + s + "초";
+                let time = document.querySelector("#time");
+
+                hms += now.getFullYear()+"년 "
+
+                time.innerText = hms;
+
+                time_refresh();
+            }, 1000/4);
+        }
+        // 실습 5
+        function age(){
+            document.querySelector("#calc").addEventListener("click", function(){
+
+                let year = document.querySelector("#year").value;
+                document.querySelector("#age").textContent =  new Date().getFullYear() - year + 1;
+                
+            })
+        }
+
+     
+    </script>
+</head>
+<body>
+  <!-- 실습 4-->
+  <div>
+    <div id="time"></div>
+</div>
+
+<div>
+    <!-- 실습 5-->
+    <div>
+        출생년도(예:2001) : <input type="text" id="year">
+        <input type="button" id="calc" value="나이계산">
+    </div>
+    <div id="age"></div>
+</div>
+</body>
+</html>

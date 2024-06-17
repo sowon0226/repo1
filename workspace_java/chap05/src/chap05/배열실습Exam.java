@@ -81,6 +81,11 @@ public class 배열실습Exam {
 				System.out.println(array.length);
 			}
 			
+//			int m = 25000;
+//			int c = 6;
+//		    double h3 = ((double) m / c);
+//			System.out.println(h3);
+			
 	}
 
 }
