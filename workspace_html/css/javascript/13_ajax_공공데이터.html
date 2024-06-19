@@ -10,40 +10,100 @@
                 forecast();
             });
         });
+        
         function forecast(){
-            let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst";
-            url += "?";
+            let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst"; // 함수(주소)
+            url += "?";                                                                           // ? 다음이 전달인자여서 포스트 방식임 
             url += "serviceKey=zufC2VntXCS5Lzt%2BSIbyHDZNBYr3pcJHaUVipLaKvBDb3wn8fEGVfiazboYrz3mZfBzhcqu%2F5gLDxOnUjeZmLQ%3D%3D";
-            url += "&";
-            url += "numOfRows=1000";
-            url += "&";
-            url += "pageNo=1";
+            url += "&";                                                                           // 전달인자를 (,) 대신에 (&)로 구분함 
+            url += "numOfRows=1000";                                                              // 키값=벨류값
+            url += "&";                                         
+            url += "pageNo=1"; // 키=벨류 로써야함 키 = 벨류로 쓰면 띄어쓰기 자체도 값으로 들어감
             url += "&";
             url += "dataType=JSON";
             url += "&";
             url += "base_date=20240618";
             url += "&";
-            url += "base_time=0630";
+            url += "base_time=0830";
             url += "&";
             url += "nx=63";
             url += "&";
             url += "ny=110";
             console.log(url)
-
+            // response 안에는 json이라는 type이 들어가 있음 
+            // json 안에 json ....이라는 배열이 들어가 있음
             let xhr = new XMLHttpRequest();
             xhr.open("get",url);
             xhr.send();
-            xhr.onload = function(){
+            xhr.onload = function(){  // onload : 
                 let data = xhr.responseText;
                 // console.log(data);
 
                 let json = JSON.parse(data);
                 console.log(json);
+
+                let info_view = document.querySelector('#info_view');
+
+                let item = json.response.body.items.item; // item 안에 배열을 적고
+                for(let i = 0; i < item.length; i++){
+
+                if (item[i].category == "T1H"){
+                    console.log(item[i])
+
+                    let html = `
+                                 <tr>
+                                        <td>${item[i].category}</td>
+                                        <td>${item[i].fcstData}</td>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                </tr>`;  
+                    info_view.innerHTML += html;
+
+                    } else if (item[i].category == "REH"){
+                    console.log(item[i])
+
+                    let html = `
+                                 <tr>
+                                        <td>${item[i].category}</td>
+                                        <td>${item[i].fcstData}</td>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                </tr>`;  
+                    info_view.innerHTML += html;
+
+                    }
+                }
+                
+                // filer 사용법
+                // let filtered = item.filter(function(info){
+                //    // return info.category == "RN1" || info.category == "RHE" 를 if문으로 풀어서 쓸 수 있다
+                //    let result = false;
+                //    if( info.category == "RN1"){
+                //     result =true;
+                //    } else if (info.category == "RHE"){
+                //     result = true;
+                //    }
+
+                //    return result;
+                // });
+                // console.log(filtered);
+
+
             };
         };
+        
+        // 프로토콜 :
+        // ip는 주소고 포트는 아파트 호수로 이해하면 됨
+        // jsonformatter라는 사이트에 들어가면 json의 내용을 알려줌
     </script>
 </head>
 <body>
     <button type="botton" id="btn">초단기예보조회</button>
+    <table>
+        <tbody id="info_view">
+
+       
+    </tbody>
+    </table>
 </body>
 </html>
