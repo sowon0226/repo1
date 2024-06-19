@@ -69,12 +69,12 @@
                                         <td>${item[i].fcstTime}</td>
                                         <td>${item[i].fcstValue}</td>
                                 </tr>`;  
-                    info_view.innerHTML += html;
+                    info_view.innerHTML += html;  // 앞에 값에 +=html을 해준다는 말임
 
                     }
                 }
                 
-                // filer 사용법
+                // filer 사용법 (원하는 값만 뽑아서 쓸 때 사용함)
                 // let filtered = item.filter(function(info){
                 //    // return info.category == "RN1" || info.category == "RHE" 를 if문으로 풀어서 쓸 수 있다
                 //    let result = false;
@@ -87,12 +87,10 @@
                 //    return result;
                 // });
                 // console.log(filtered);
-
-
             };
         };
         
-        // 프로토콜 :
+        // 프로토콜 : 약속 된 것을 실행하는 것 
         // ip는 주소고 포트는 아파트 호수로 이해하면 됨
         // jsonformatter라는 사이트에 들어가면 json의 내용을 알려줌
     </script>
