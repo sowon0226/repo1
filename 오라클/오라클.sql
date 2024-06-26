@@ -43,6 +43,7 @@ select ename, sal, sal*12+comm, comm from emp;
 -- 가능하면 띄어쓰기 보다  _를 넣자
 select ename, sal, sal*12+comm as new_sal, comm from emp; 
 
+
 -- order by : 해당 컬럼으로 정렬해줌 (오름차순 내림차순만 가능함)
 -- 오름차순 : asc 생략가능
 -- 내림차순 : desc 정렬만
@@ -260,7 +261,7 @@ select
     substr(job, (length(job)+1) / 2, 1),
     replace (
     job,
-    substr(job, (length(job)+1) / 2, 1),
+    substr(job, (length(job)+1) / 3, 1),
     '*'
     )
 from emp;
@@ -336,11 +337,711 @@ from emp;
 -- 실습 문제 3
 -- 앞 글자 하나만 
 -- WARD -> *ARD , MARTIN -> *ARTIN
-
+select 
+    ename,
+    lpad(substr(ename, 2), length(ename), '*')
+    from emp;
 -- 실습 문제 4
 -- 두번째 글씨만 *
 -- WARD -> W*RD, MARTIN -> M*RTIN
-
+select
+    ename,
+    substr(ename, 1, 1) || '*'|| substr(ename,3)
+    -- lpad와 rpad로만으로 안돼는 이유는 글자를 자른 후 붙여주기를 못함으로
+    -- || 더하기 표시를 사용해서 붙여 줘야함
+from emp;    
 -- 실습 문제 5 
 -- 가운데 글씨만 *
 -- WARTIN -> W*RTIN, SCOTT -> SC*TT
+select
+    ename,
+    substr(ename,1 , length(ename) /2-0.5)|| '*'||
+    substr(ename,length(ename)/2+1.5 )
+    -- 위에서는 0.5을 버리고
+    -- 아래에서는 버린 0.5을 주워와서 1.5을 더해줌
+from emp;
+
+select ename from emp;
+
+-- 선생님과 함께 풀이함
+-- 실습 문제 2
+-- 사원의 이름을 앞에 두자리만 보이게 하고 나머지는 *로 표시
+-- 정답의 예 : WARD -> MA** , MARTIN -> MA****
+-- 쉬운버전 : 앞에 두 글자 + '***'
+select
+    -- 방법은 2가지가 있음
+    ename,
+    rpad( substr( ename, 1, 2),length(ename), '*')
+from emp;
+-- 실습 문제 3
+-- 앞 글자 하나만 
+-- WARD -> *ARD , MARTIN -> *ARTIN
+select '*' || substr(ename,2) from emp;
+-- 실습 문제 4
+-- 두번째 글씨만 *
+-- WARD -> W*RD, MARTIN -> M*RTIN
+select substr(ename, 1, 1) || '*' || substr(ename, 3) from emp;
+-- 실습 문제 5 
+-- 가운데 글씨만 *
+-- WARTIN -> W*RTIN, SCOTT -> SC*TT
+select 
+    length(ename)/2 + 1,
+    substr(ename, 1, length(ename)/2) ||'*'|| substr(ename, length(ename)/2 +2)
+from emp;    
+
+-- trunc : 소수수점 이후 버림
+select
+    trunc(1234.5678),
+    trunc(1234.5678, 2), -- 소수점 2번째 이후 버림
+    trunc(1234.5678, -2), -- 앞 두번째 자리부터 버림
+    trunc(-12.34)
+from dual;
+
+-- ceil : .이후 모두 올림 나보다 가까운 큰 정수 쪽으로 감
+-- floor : . 이후 모두 버림 나보다 작은 정수 쪽으로 감
+select
+    ceil (3.14), 
+    floor(3.14),
+    ceil(-3.14), -- -3이 나온 이유 : -일 때 올림은 나보다 큰 정수로 표현
+    floor(-3.14) -- 
+from dual;
+
+-- sysdate : 날짜 함수 (+9시간을 해줘야 우리나라 시간임)
+-- 지금 오라클 pc의 시간이 나옵니다
+-- 강사 pc는 9시간 차이가 난다(영국 0시 기준 한국 +9시)
+-- 날짜 정보 중 일부만 select로 표시됨
+-- 오라클은 윤년, 윤달 계산이 제일 정확함
+select sysdate, sysdate+1, sysdate-1 from dual;
+
+-- add_months : 한달 뒤를 출력할 때 사용하는 코드
+-- 컬럼에 +를 적으면 모두 숫자로 변경해서 적용함
+-- || 숫자도 문자로 적용
+select -- 9시간을 더할 때 sysdate+(9/24)로 표현함
+    to_char (sysdate, 'YYYY"년"/MM"월"/DD"일" HH24"시":MI"분":SS"초"')
+from dual;
+
+-- to_number : ?
+select -- 오늘 날짜 - 원하는 날짜 
+    sysdate - to_date('2024-05-07', 'yyyy-mm-dd'),
+    'YYYY"년"/MM"월"/DD"일" HH24"시":MI"분":SS"초"'
+from dual;
+
+-- null 처리함수 ( null 앞에 nvl을 써야함, nvl은 오라클만 사용가능)
+-- null은 무한대여서 더하든 곱하든 null임
+-- 필요한 경우 문자가 들어갈 수 있다
+select
+    comm,
+    nvl(comm, -1),
+    sal,
+    sal + comm,
+    sal + nvl(comm, 0) 
+from emp;
+
+-- where 조건에서도 nvl을 사용가능
+-- where 조건은 무조건 참인 것을 알려줌
+-- 삼항 연산자 nvl2에서
+-- '0','X'는 널인경우 0을 표시 
+select *from emp
+where nvl(comm, 0) = 0; -- null일 경우 null이 0이고, 결과 값도 0인 조건만 출력됨
+
+-- case문 case 는 when,then이 한 묶음 (예) if->else if->else느낌
+-- case로 시작해서 end로 닫아줌
+-- decode는 모든 case문으로 바꿀수 있지만, case문은 decode로 바꿀 수 없다
+select
+    case 
+        when
+            comm is null
+            then
+                'N/A' -- 숫자
+        else
+             to_char(comm) -- comm은 문자여서 to_char를 이용해 숫자로 변환
+           -- ''||comm 위 아래 둘다 사용 가능
+    end new_comm
+from emp;    
+-- nvl 사용하는법
+-- null 처리 할 때 nvl을 사용해서 코딩하는법
+select
+    case 
+        when
+            comm is null
+            then
+                0 --(nvl)
+        else
+             comm 
+    end new_comm
+from emp;    
+
+-- p.174 
+-- Q2
+select
+    empno,ename,sal,
+    trunc(sal/21.5, 2) as DAY_PAY,
+    round(sal/21.5 /8, 1) as TIME_PAY
+from emp;
+-- p.175
+-- Q3
+select
+    empno, ename,
+    to_char(hiredate,'YYYY/MM/DD' )as hiredate,
+    to_char (add_months(hiredate, 3), 'YYYY-MM-DD' )as R_JOB, 
+    case when comm is null then'N/A' else to_char(comm)end comm
+from emp;
+-- Q4
+select
+    empno,ename,
+    mgr,
+   -- substr(mgr, 0, 2),
+    case
+    when mgr is null then '0000'
+    when substr(mgr, 0, 2) = 75 then '5555'
+    when substr(mgr, 0, 2) = 76 then '6666'
+    when substr(mgr, 0, 2) = 77 then '7777'
+    when substr(mgr, 0, 2) = 78 then '8888'
+    else to_char(mgr)
+    end as CHG_MGR
+from emp;
+-- 선생님과 함께 푼 방식
+-- Q2
+select
+    empno, ename, sal,
+    trunc(sal/ 21.5, 2) as day_pay,
+    round((sal/ 21.5) / 8, 1)time_pay1,
+    trunc(sal/ 21.5, 2) /8 time_pay2
+from emp;
+-- Q3
+select empno, ename, hiredate,
+    to_char (add_months(hiredate, 3), 'yyyy/mm/dd') as r_job_0,
+    next_day(add_months(hiredate, 3), 2) as r_job_1, -- 일욜1, 월욜2,.....토욜7
+    comm,
+    nvl(to_char(comm), 'N/A'),
+    to_char(null),
+    case
+    when comm is null then 'N/A'
+    else to_char(comm)
+    end,
+    decode(comm,
+    null, 'N/A', -- decode는 to_char안써도 알아서 해줌
+    comm)
+from emp;
+-- Q4
+select
+    empno,ename,mgr
+case
+    then mgr is null then '0000'
+    else 
+        case
+        when substr(mgr, 1, 2) =75 then '5555'
+        when substr(mgr, 1, 2) =76 then '6666'
+        else to_char(mgr)
+        end
+end chg_mgr_1,
+case 
+    when mgr is null then '0000'
+    else   
+        case substr(mgr, 1, 2)
+        when '75' then '5555'
+        when '76' then '6666'
+        else to_char(mgr)
+    end
+end chg_mgr_2,
+case
+    when mgr is null then '0000'
+    when mgr like '75%' then '5555'
+    when mgr like '76%' then '6666'
+    else to_char(mgr)
+end chg_mgr_3,
+case
+     when mgr like '75%' then '5555'
+    when mgr like '76%' then '6666'
+    else nvl (to_char(mgr), '0000')
+end chg_mgr_4, 
+case 
+    when substr(mgr, 2, 1) 
+from emp;    
+
+-- select sum(sal), sal from emp; sal 병합이 안됨
+-- count처럼 null은 제외 됨
+-- count에서는 *를 많이 씀
+select sum(sal), count(sal),count(*), count(comm) from emp;
+
+select count(*) from emp where ename like '%A%';
+-- 앞에 max와 뒤에 max는 관계가 없음
+-- avg 평균값
+select max(sal), max(ename), min(hiredate), min(comm), avg(sal) from emp;
+
+-- 부서별 급여 총 합, 평균 표시
+-- deptno, sum, avg
+select
+    sum(sal), avg(sal)
+from emp
+where deptno = 10
+union all
+select
+    sum(sal), avg(sal)
+from emp
+where deptno = 20
+union all
+select
+    sum(sal), avg(sal)
+from emp
+where deptno = 30;
+
+-- distinct처럼 중복을 제거해줌, 분류해줌
+-- select에는 group by한 것이나 다중행 함수(집계함수)만 올 수 있음 
+select deptno, avg(sal), sum(sal), count(*) from emp
+group by deptno; -- from 뒤에 group by를 쓸 수 있다 그 앞에 적으면 에러
+-- group by는 ,를 이용해서 넣을 수 있다
+-- count(*)은 중복된 것을 알려줌
+select deptno, empno from emp
+group by deptno, empno; 
+
+select deptno, job, count(*)
+from emp
+group by deptno, job -- select에 있는 것만 group by에 적을 수 있다
+order by deptno, job; -- order by는 group by에 있는 것만 적을 수 있음
+
+select deptno, job, count(*)
+from emp
+-- where count(*)>2 에러남
+group by deptno, job 
+order by deptno, job;
+
+-- having : group by에서만 사용된다.
+-- 집계함수를 조건으로 걸고 싶은 경우에 사용
+-- group by의 조건절
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+   -- having avg(sal) >= 2000;
+   -- having count(*) >= 2;
+   having deptno = 20;
+   
+-- p.212 
+-- Q1
+select
+    deptno, trunc(avg(sal)),max(sal), min(sal), count(*)
+from emp
+group by deptno;
+
+-- Q2
+select job, count(*) from emp group by job
+having count(*) >= 3; -- where 조건으로 쓸 수 있음, 또다른 테이블을 만들어서 넣음
+
+select * from dept;
+
+-- 순서
+/* 5 */select job, count(*) cnt -- 어떤것을 할지 결정 후에
+/* 1 */from emp 
+/* 2 */where sal > 1000 -- count을 같이 못씀
+/* 3 */group by job
+/* 4 */having count(*) >= 3
+/* 6 */order by cnt desc; -- 정렬
+
+-- 오라클은 내가 갖고 있는 데이트를 모두 보여줌
+-- 조건을 걸면 원하는 조건만 보여줌
+select * 
+from emp, dept
+order by empno;
+
+select 14 * 4 from dual;
+
+-- 조인 기법
+-- 테이블 두개이면 둘을 엮는 조건을 찾아야함
+select * 
+from emp, dept
+where emp.deptno = dept.deptno
+order by empno;
+
+-- 주석처리 된 것은 사용 안됨 에러남
+select emp.ename, /* emp.loc */ dept.loc, /* deptno */ emp.deptno -- ename은 emp에만 있음
+from emp, dept
+where emp.deptno = dept.deptno -- 테이블명.컬럼명을 뜻함
+order by empno;
+-- 테이블 두개 이상 조회할 때 관계를 꼭 알려줘야 원하는 정보만 출력된다
+-- 전체 테이블 수 - 1개의 조건이 적당하다
+
+-- 별칭을 붙이면 더이상 원래 이름을 못씀
+select *
+from emp e, dept d -- 여기서는 as는 못씀, "/'못씀
+where E.deptno = d. deptno; -- 대소문자 둘다 사용 가능
+--where emp.deptno = dept. deptno; 별칭을 줘서 원래 이름 쓰면 에러
+
+select e.ename from emp e; -- 단독으로 쓰고 싶을 때도 별칭을 붙여줌
+
+-- *와 다른 컬럼을 같이 쓰고 싶을 때 *에 테이블을 지정해줘야함
+-- 별칭을 붙여줘야함
+select ename, d.*
+from emp e, dept d 
+where E.deptno = d. deptno;
+
+select * from salgrade;
+
+select *
+from emp e, salgrade s
+where e.sal >= s.losal and e.sal <= s.hisal;
+
+
+select * from emp;
+
+select *
+from emp e1, emp e2
+where e1.mgr = e2.empno;
+
+-- using에 둘다 같은 컬럼명이 있는 경우만 쓸 수 있다
+-- emp
+select *
+from emp join dept using (deptno);
+
+-- 두 테이블이 다른 경우에 사용
+select *
+from emp join dept on (emp.deptno = dept.deptno);
+
+-- king(null)이 안나옴 
+select *
+from emp e1 join emp e2 on (e1.mgr = e2.empno);
+
+-- king(null)을 나오게함
+-- left outer join : 왼쪽 테이블을 모두 출력해주는 것을 보장해준다
+-- join을 기준으로 왼쪽 테이블을 모두 출력
+-- 없으면 모두 null로 처리함
+select *
+from emp e1 left outer join emp e2 on (e1.mgr = e2.empno);
+-- right outer join : 오른쪽을 모두 출력 왼쪽은 비워있어도 상관없음
+select *
+from emp e1 right outer join emp e2 on (e1.mgr = e2.empno);
+
+-- Q1
+-- empno, ename, dame, loc 출력 : 결과 14줄
+select empno, ename, dname, loc  
+from emp e, dept d 
+where E.deptno = d. deptno;
+-- 방법 1
+select empno, ename, dname, loc 
+from emp, dept
+where emp.deptno = dept.deptno;
+-- 방법 2
+select empno, ename, dname, loc 
+from emp join dept using (deptno);
+-- 방법 3
+select empno, ename, dname, loc 
+from emp left outer join dept on(emp.deptno = dept.deptno);
+-- Q2
+-- 사번, 이름 부서명, 급여등급을 모두 출력 : 결과 14줄
+-- 테이블 3개
+-- 방법 1
+-- salgrade를 사용할 때는  e.sal >= losal and e.sal <= hisal 꼭 같이 써줘야함
+select e.empno, e.ename, d.dname, s.grade
+from emp e, dept d, salgrade s
+where e.deptno = d.deptno
+and (e.sal >= s.losal and e.sal <= s.hisal);
+-- 방법 2
+select e.empno, e.ename, d.dname, s.grade
+from salgrade s, emp e join dept d using (deptno)
+where (e.sal >= s.losal and e.sal <= s.hisal);
+-- 방법 3
+select e.empno, e.ename, d.dname, s.grade
+from emp e
+left outer join dept d on (e.deptno = d.deptno)
+left outer join salgrade s on (e.sal >= s.losal and e.sal <= s.hisal);
+
+-- Q3
+-- 매니저 보다 월급이 높은 사원의 이름, 급여 매니저 이름, 매니저 급여 출력
+select e1.ename, e1.sal, e2.ename, e2.sal 
+from emp e1 left outer join emp e2 on (e1.mgr = e2.empno)
+where e1.sal > e2.sal;
+
+select e1.ename, e1.sal, e1.mgr, e2.empno, e2.sal
+from emp e1, emp e2
+where e1.mgr = e2.empno
+and e1.sal > e2.sal;
+-- p.239
+-- Q1
+select *from emp;
+select * from dept;
+select emp.deptno,ename, dname, sal
+from emp, dept
+where sal > 2000 and emp.deptno = dept.deptno
+order by emp.deptno;
+
+select emp.deptno,  emp.empno, emp.ename, emp.sal
+from emp, dept
+where emp.deptno = dept.deptno
+and sal > 2000
+order by deptno;
+-- Q2
+select 
+deptno, max(sal), min(sal), count(deptno)cnt,
+trunc(avg(sal),0)
+from emp
+group by deptno
+order by deptno;
+
+select d.deptno, d.dname, floor(avg(sal)), max(sal), min(sal),count(*)
+from emp e left outer join dept d on (e.deptno =  d.deptno)
+group by d.deptno, d.dname;
+-- Q3
+select dept.deptno, dname, empno, ename, job, sal
+from emp right outer join dept on (emp.deptno = dept.deptno) 
+order by emp.deptno, ename;
+
+select *
+from dept d left outer join emp e on (e.deptno = d.deptno)
+order by d.deptno;
+
+-- 서브쿼리
+-- 안쪽에 있는 쿼리
+select sal from emp where ename = 'JONES';
+
+select * from emp 
+where sal >(select sal from emp where ename = 'JONES');
+-- where 조건이 없으면 오류가 뜸
+
+select *
+from emp
+where sal > ( select avg(sal) from emp) and deptno = 20;
+-- 평균 급여보다 많이 받는 사람들
+select * from emp
+where sal > ( select avg(sal) from emp):
+-- BLAKE씨 보다 높은 연봉을 받는 사람드
+select * fromemp
+where sal > ( select sal from emp where enamw = 'BLAKE');
+-- JONES 와 같은 job을 가지고 있는 사원들
+select * from emp
+where job = ( select job from emp where ename = 'JONES');
+
+select * from emp
+where sal in(
+select max(sal) from emp group by deptno);
+
+select *
+from (
+    select * from emp where deptno = 10);
+
+-- rownum : 줄 번호    
+select rownum, emp.*
+from emp
+--where rownum = 4; -- 1로 초기화가 되어 있어서 안나옴 where에서 사용이 안됨
+order by ename; -- 실행 순서 때문에 (order by는 맨 나중에 실행됨)
+
+select rownum , e.*
+from (
+    select * from emp order by ename) e;
+
+select job, count(*) from emp
+group by job
+having count(*) >= 3;
+
+select *
+from ( select job, count(*) cnt from emp
+       group by job)
+where cnt >= 3; -- cnt별칭을 붙여주고 사용, having을 안쓰고 쓰는 방법
+
+-- wuth는 무조건 select 앞에 적어야 실행 됨
+with e10 as (
+            select * from emp where deptno = 10)
+select * from e10; 
+select * from dept;
+select * from salgrade; 
+-- p.262
+-- Q1
+select job, empno, ename, sal, deptno from emp
+where job =( select job from emp where ename = 'ALLEN');
+
+select job, empno, ename, sal, deptno, danme 
+from emp join dept using (deptno)
+where job = (select job from emp where ename = 'ALLEN')
+order by sal desc, ename;
+-- Q2
+-- 일단 전체사원의 평균 급여를 조회
+select avg(sal) from emp;
+select empno, ename, sal from emp, dept, salgrade
+where sal > (select avg(sal) from emp);
+
+-- 일단 전체사원의 평균 급여를 조회
+select avg(sal) from emp; --2073......
+select * from emp e, dept d, salgrade s
+where 
+    e.deptno = d.deptno
+    and e.sal >= s.losal and  e.sal <= s.hisal
+    and sal > (select avg(sal) from emp)
+order by sal desc, empno;
+-- Q3
+select e.empno, e.ename, e.job, d.deptno, d.dname, d.loc
+from emp e, dept d
+where e.deptno = d.deptno
+and e.deptno = 10, 30; 
+
+select empno, ename, job, e.deptno, dname, loc
+from emp e
+left outer join dept d on (e.deptno = d.deptno)
+where e.deptno = 10
+and job not in ( select job
+                from emp
+                where deptno =30);
+
+-- Q4
+select e.empno, e.ename, s.sal, s.grade from emp e
+where sal in (select max(sal) from emp group by empno);
+
+select empno, ename, job, e.deptno, dname, loc  from emp e
+lefr outer join salgrade s
+on (e.sal >= s.losal and e.sal <= s.hisal)
+where sal > (select max(sal) from emp where job ='SALESMAN');
+                    -- 10장
+create table dept_temp
+as select * from dept;
+
+select * from dept_temp;
+
+-- 테이블에 데이터를 추가(열 추가)
+insert into dept_temp(deptno, dname, loc)
+                values(50, 'DATABASE', 'SEOUL');
+                
+select * from dept_temp;         
+
+insert into dept_temp
+values (60, 'network', 'Busan');
+
+select * from dept_temp;
+-- 테이블명 뒤에 ()생략하면 모든 컬럼 에러
+insert int dept_temp
+values ('network', 60, 'Busan');
+
+insert into dept_temp(deptno, dname, loc)
+values (70, 'web', null);
+
+select * from dept_temp;
+
+insert into dept_temp(deptno, dname, loc)
+values (80, 'mobile', '');
+
+select * from dept_temp;
+
+-- 컬럼을 생략하면 자동으로 null이 들어간다
+insert into dept_temp(deptno, loc)
+values (90, '인천');
+
+select * from dept_temp;
+                    -- 12장 
+desc emp;
+select * from salgrade;
+
+create table emp_ddl(
+    empno number(4),  -- 0 ~ 9999까지만 들어갈 수 있다 , number를 쓴 이유는 숫자만 받겠다
+                      -- empno에 varchar2 도 쓸 수 있다(문자 숫자 다 들어옴)
+    ename varchar2(10),-- varchar는 문자를 뜻하고 10은 10바이트만 들어갈 수 있다는 뜻
+    job varchar2(9), -- vatchar2 : 제한보다 적은 글씨가 적힌 글씨 만큼의 공간
+    mgr number(4),
+    hiredate date,
+    sal number(7,2), -- 앞에 7은 숫자 길이 2는 소수점 둘째자리까지 기록할 수 있다
+    comm number(7,2),
+    deptno number(2)
+);
+
+select * from emp_ddl;
+desc emp_ddl;
+
+-- 복사문
+create table dept_ddl -- dept_ddl은 원본이 없음, 새로운 테이블을 만들어줌 
+ as select * from dept; -- 먼저 실행 후 위에 새로 만든 테이블에 넣은 후 실행됨
+-- 출력문 비슷함
+select * from dept_ddl; -- 
+
+create table emp_ddl_30
+as select empno,ename, sal from emp where deptno =30;
+
+select * from emp_ddl_30;
+
+select * from emp
+where 1 <> 1;
+
+
+
+create table emp_alter
+as select * from emp; -- 실행을 꼭 해줘야 아래 select가 실행됨
+
+select * from emp_alter;
+-- 테이블을 수정하고 컬럼을 추가함
+-- add했을 경우 지정을 안해주면 null이 들어감
+alter table emp_alter
+add hp varchar(20);
+
+select * from emp_alter; 
+-- rename to : 컬럼의 이름을 바꾸는 방법
+alter table emp_alter 
+rename column hp to tel;
+
+select * from emp_alter;
+
+-- modify : 열(타입)을 변경하는 방법
+alter table emp_alter
+modify empno number(5);
+
+desc emp_alter;
+
+-- 크키가 커지는건 가능하지만 줄어드는 것은 불가능함
+alter table emp_alter
+modify empno number(4); 
+
+-- drop column : 특정 열(타입)을 삭제하는 방법
+alter table emp_alter
+drop column tel;
+
+select * from emp_alter;
+-- 삭제 후 추가하면 새로운 컬럼을 주는 것이여서 
+-- 그 전 데이터는 없어져서 null로 표시됨
+alter table emp_alter
+drop column comm;
+
+select * from emp_alter;
+
+-- rename 테이블 이름 바꾸는 방법
+rename emp_alter to emp_rename;
+
+select * from emp_rename;
+-- 데이터를 삭제 (컬럼명만 남기고 내용은 다 지워짐)
+truncate table emp_rename;
+
+-- drop table : 테이블을 삭제
+drop table emp_rename;
+
+create table emp_hw
+empno number(4),
+ename varchar2(10),
+job varchar2(9),
+
+
+
+
+
+select job, ename, empno, sal, e.deptno, dname from emp e, dept d
+where e.deptno = d.deptno
+and job = (
+select job from emp
+where ename = 'ALLEN');
+
+select empno, ename, dname, hiredate, loc, sal, grade  -- d.deptno
+from emp e, dept d, salgrade s
+where e.deptno = d.deptno
+and e.sal >= losal and e.sal <= hisal
+and sal >
+(select avg(sal) from emp);
+
+select * from emp
+where deptno =10;
+select * from emp 
+where deptno = 30;
+select * from emp e, dept d
+where e.deptno = d.deptno
+and d.deptno =10
+and job not in (select job from emp  -- not을 쓸 때 in을 써주는 것이 좋다
+where deptno = 30 );
+
+select empno, ename, sal, grade from emp e, salgrade
+where  e.sal >= losal and e.sal <= hisal
+and sal > ( select max(sal) from emp
+where job = 'SALESMAN');
+
+
+select max(sal) from emp
+where job = 'SALESMAN';
