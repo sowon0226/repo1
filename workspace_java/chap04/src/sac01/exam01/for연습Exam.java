@@ -158,7 +158,6 @@ public class for연습Exam {
 	    	}
 	    	System.out.println();
 	    }
-	   
 	    
 	 }
 }

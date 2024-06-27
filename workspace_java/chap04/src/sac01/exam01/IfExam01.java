@@ -77,6 +77,7 @@ public class IfExam01 {
 				System.out.println("홀수");
 			} else {
 				System.out.println("짝수");
+				
 			}
 			
 			

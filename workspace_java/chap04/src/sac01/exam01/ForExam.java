@@ -79,11 +79,11 @@ public class ForExam {
 //		System.out.println("for 사용 sum2 : " + sum2);
 //
 //		// 1~ 100까지 합 구하기
-//		int sum3 = 0;		
-//		for ( int e2 = 1 ; e2 <= 100 ; e2++ ) {
-//		   sum3 = sum3 +e2;	
-//		}
-//		System.out.println("1~100의 합 :"+ sum3);
+		int sum3 = 0;		
+		for ( int e2 = 1 ; e2 <= 100 ; e2++ ) {
+		   sum3 = sum3 +e2;	
+		}
+		System.out.println("1~100의 합 :"+ sum3);
 //		// 복습하기
 //
 //		// 1~10까지 출력
