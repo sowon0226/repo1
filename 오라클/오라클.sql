@@ -908,10 +908,12 @@ insert int dept_temp
 values ('network', 60, 'Busan');
 
 insert into dept_temp(deptno, dname, loc)
-values (70, 'web', null);
+values (70, '웹', null);
 
 select * from dept_temp;
 
+-- ''도 null로 보이는데 그래도 nill이라고 쓰자
+-- 
 insert into dept_temp(deptno, dname, loc)
 values (80, 'mobile', '');
 
@@ -921,7 +923,108 @@ select * from dept_temp;
 insert into dept_temp(deptno, loc)
 values (90, '인천');
 
-select * from dept_temp;
+select * from dept_temp where loc is null;
+
+create table emp_temp
+as select * from emp;
+
+select * from emp_temp;
+
+insert into emp_temp(empno, ename, job, mgr, hiredate, sal, comm,deptno)
+values(9999, '홍길동', 'PRESIDENT', null, '2001/01/01', 5000, 1000, 10);
+
+select * from emp_temp;
+
+insert into emp_temp(empno, ename, job, mgr, hiredate, sal, comm,deptno)
+values(1111, '성춘향', 'MANAGER', 9999, '2001-01-05', 4000, null, 20);
+
+select * from emp_temp;
+
+insert into emp_temp(empno, ename, job, mgr, hiredate, sal, comm,deptno)
+values(2111, '이순신', 'MANAGER', 9999, to_date( '07/01/2001', 'dd/mm/yyyy'),
+4000, null, 20);
+
+select * from emp_temp;
+
+insert into emp_temp(empno, ename, job, mgr, hiredate, sal, comm,deptno)
+values(3111, '심청이', 'MANAGER', 9999, sysdate, 4000, null, 30);
+
+select * from emp_temp;
+
+-- p.275 실습 14가 정석
+-- 모든걸 모든거에 넣어서 컬럼명은 생략가능
+insert into emp_temp
+select * from emp where deptno =10;
+
+select * from emp_temp;
+
+create table dept_temp2
+as select * from dept;
+
+select * from dept_temp2;
+
+-- 업데이트
+-- 지정된 컬럼 모두 바꾸기
+update dept_temp2
+set loc = 'seoul';
+
+select *from dept_temp2;
+
+-- rollback : 수정 전으로 돌려주는 것
+rollback;
+
+-- 테이블 일부만 수정
+update dept_temp2
+set dname = 'DATABASE',
+loc = 'seoul'
+where deptno = 40;
+
+select * from dept_temp2;
+
+-- update 순서
+-- update 하기 전에 select로 where 조건이 정확한디 확인 후에
+-- where를 그대로 복사해서 update에 붙여넣도록 하자
+select * from dept_temp2 
+where deptno = 40; -- 1번 select ~ where ~;, 한 다음 update문을 사용
+
+create table emp_temp2
+as select * from emp;
+
+select * from emp_temp2;
+
+select * from emp_temp2
+where job = 'MANAGER';
+
+-- delete : where절을 이용해야함
+-- 데이터 지우기
+delete emp_temp2
+where job = 'MANAGER';
+
+-- 실습
+-- emp_temp2에서
+-- 급여가 1000이하인 사원의
+-- 급여를 3% 인상
+select * from emp_temp2
+where sal <= 1000;
+
+select ename sal, sal*1.03 from emp_temp2
+where sal <= 1000;
+
+update emp_temp2
+set sal = sal * 1.03
+where sal <= 1000;
+
+select * from emp_temp2;
+
+delete emp_temp2;
+
+select * from emp_temp2;
+
+rollback;
+select * from emp_temp2;
+
+                -- 11장
+-- 책보기
                     -- 12장 
 desc emp;
 select * from salgrade;
@@ -1009,39 +1112,51 @@ create table emp_hw
 empno number(4),
 ename varchar2(10),
 job varchar2(9),
+                    -- 13장
+select * from dict;
+select * from user_tables;
 
+select * from USER_CONSTRAINTS;
 
+-- index 색인
+-- 오름차순, 내림차순 따로 관리
+create index idx_emp_sal
+on emp( sal );
+select * from user_indexes;
 
+drop index idx_emp_sal;
 
-
-select job, ename, empno, sal, e.deptno, dname from emp e, dept d
-where e.deptno = d.deptno
-and job = (
-select job from emp
-where ename = 'ALLEN');
-
-select empno, ename, dname, hiredate, loc, sal, grade  -- d.deptno
-from emp e, dept d, salgrade s
-where e.deptno = d.deptno
-and e.sal >= losal and e.sal <= hisal
-and sal >
-(select avg(sal) from emp);
+create index idx_emp_sal
+on emp( sal );
 
 select * from emp
-where deptno =10;
-select * from emp 
-where deptno = 30;
-select * from emp e, dept d
-where e.deptno = d.deptno
-and d.deptno =10
-and job not in (select job from emp  -- not을 쓸 때 in을 써주는 것이 좋다
-where deptno = 30 );
+order by sal;
 
-select empno, ename, sal, grade from emp e, salgrade
-where  e.sal >= losal and e.sal <= hisal
-and sal > ( select max(sal) from emp
-where job = 'SALESMAN');
+-- plan
+-- sql developer에서는 상단 세번째 아이콘 "계획설명"
 
+select max(empno)+1 from emp_temp2; 
 
-select max(sal) from emp
-where job = 'SALESMAN';
+insert into emp_temp2 (empno, ename)
+values (select max(empno)+1 from emp_temp2),
+'신입이2');
+select * from emp_temp2;
+
+create table tb_user(
+    user_id number,
+    user_name varchar2(30)
+);
+select * from tb_user;
+
+create sequence seq_user;
+
+select seq_user.nextval from dual;
+select seq_user.currval from dual;
+
+insert into tb_user (user_id, user_name)
+values (seq_user.nextval, '유저명1');
+insert into tb_user (user_id, user_name)
+values (seq_user.nextval, '유저명2');
+insert into tb_user (user_id, user_name)
+values (seq_user.nextval, '유저명3');
+select * from tb_user;
