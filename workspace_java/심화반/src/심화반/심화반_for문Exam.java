@@ -192,7 +192,6 @@ public class 심화반_for문Exam {
 //		System.out.println("현우"+hw);
 		
 		
-		
 		int hw = 0;
 		
 		for(int y=0; y<=400; y+=6) {
@@ -201,13 +200,11 @@ public class 심화반_for문Exam {
 		System.out.println("현우"+hw);
 		
 		
-		
-		
-		
 		int week = 0;
 		for(int a=400;a>=0;a-=6) {
 			week++;
-		} System.out.println("몇 주?"+week);
+		} 
+		System.out.println("몇 주?"+week);
 		
 	}
 		
