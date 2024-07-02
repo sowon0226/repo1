@@ -1160,3 +1160,100 @@ values (seq_user.nextval, '유저명2');
 insert into tb_user (user_id, user_name)
 values (seq_user.nextval, '유저명3');
 select * from tb_user;
+
+
+-- primary key, pk : 주요키, 중요키, 기본키
+-- not null + unique 조건
+-- 생선과 동시에 index도 생성해줌
+-- create table에서는 primary key를 딱 하나만 지정
+-- 두개 이상의 컬럼을 primary key로 지정 하려면 alter 사용
+create table table_pk(
+    login_id varchar2(20) primary key,
+    login_pwd varchar2(20) not null,
+    tel       varchar2(20)
+);
+select * from user_constraints
+where table_name = 'TABLE_PK';
+
+select * from user_indexes;
+
+create table table_pk2(
+    login_id varchar2(20) constraint table_pk2_login_id primary key,
+    login_pwd varchar2(20) constraint table_pk2_login_pwd not null,
+    tel       varchar2(20)
+);
+insert into table_pk (login_id, login_pwd, tel)
+values ('id', 'pw',null);
+insert into table_pk (login_id, login_pwd, tel)
+values ('id', 'pw',null); -- violated 위반
+insert into table_pk (login_id, login_pwd, tel)
+values ('id', 'pw',null);
+
+create table table_pk3(
+    login_id varchar2(20), 
+    login_pwd varchar2(20), 
+    tel      varchar2(20),
+    
+    primary key (login_id, login_pwd)
+);
+insert into table_pk3 -- 이 조합으로는 또 못씀
+values ('id1', 'pw1', null);
+insert into table_pk3
+values ('id1', 'pw2', null);-- id,pw 둘중 하나를 변경해주면 가능
+select * from table_pk3;
+select * from user_constraints
+where table_name = 'TABLE_PK3';
+
+create table dept_fk(
+    deptno1 number primary key,
+    dname varchar2(14)
+);    
+-- foreign key, fk, 외래키, 참조키
+-- 대상이 되는 테이블의 컬럼과 같은 타입으로 지정해야 한다
+-- 컬럼명은 서로 달라도 관계 없다(보통 같게 한다)
+-- 대상이 되는 컬럼은 pk여야 한다
+create table emp_fk(
+    empno number primary key,
+    ename varchar2(10),
+    deptno number references dept_fk(deptno1) 
+    -- deptno number references dept_fk -- 만약 컬럼이 같다면 컬럼명 생략 가능
+);
+insert into dept_fk
+values(100,'1강의실');
+
+insert into emp_fk
+values(1,'이름', 101);-- 저쪽에 없으니까 에러 (101)
+insert into emp_fk
+values(1,'이름', 100);
+
+update emp_fk set deptno =101;
+-- emp_fk에서 100을 참조하고있어서 수정,삭제 불가
+update dept_fk set deptno1 =101; 
+delete dept_fk;
+
+delete emp_fk;
+
+create table emp_fk2(
+    empno number primary key,
+    ename varchar2(10),
+    deptno number 
+    
+    foreign key (deptn)
+    references dept_fk(deptno1) 
+    -- deptno number references dept_fk -- 만약 컬럼이 같다면 컬럼명 생략 가능
+);
+
+create table table_default(
+    login_id varchar2(20) primary key,
+    login_pwd varchar2(20) not null,
+    tel       varchar2(20) default '000-0000'
+);
+
+insert into table_default
+values ('id', 'pw', '010-1233-4567');
+insert into table_default(login_id, login_pwd)
+values ('id2', 'pw2');
+select * from table_default;
+
+
+ 

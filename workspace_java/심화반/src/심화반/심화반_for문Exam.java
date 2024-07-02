@@ -156,14 +156,59 @@ public class 심화반_for문Exam {
 		// 100에서 17씩 계속 빼줌
 		// 0 이하가 될 때까지
 		// 총을 총 5번 쏘고, 남은 체력은 0.8.......이 남음
-		int hp =100;
-		System.out.println(hp-17);
-		hp=hp-17;
-		System.out.println(hp-17);
-		hp=hp-17;
-		System.out.println(hp-17);
 		
-	
+		//100- 17 = 83
+		//100- 17 - 17 =66
+		//100 - 17 - 17 -17 = 49
+		//100 - 17 - 17 - 17- 17 = 32
+		//100 - 17 - 17 - 17 - 17- 17 = 15
+		//100 - 17 - 17 - 17 - 17 - 17 - 17 =-2
+		System.out.println("--------------------------------------------------");
+		int hp = 100;
+		int k = 17;
+		int j = 0;
+		for( ; hp >=0; j++) {
+			hp-=k;
+			//System.out.println(j);
+		}
+		System.out.println(j);
+		// 400만원의 원금 회수
+        // 일주일에 6만원씩
+		// 일주일 6만원씩 수금을 합니다
+		// 몇일이 걸릴까요
+		// 1주일 6만원
+		// 2주일 12만원
+		// 3주일 18만원
+		// 400 / 6 
+		
+		//언니가 풀던 식
+//		int hw = 0;
+//		int w = 6; // 일주일 수금 6만원
+//		int m = 400; // 현우가 되찾아야하는 돈
+//		for(int y=0; y <=400; y+=6) {
+//			hw = hw++; //여기에서 hw= 만 지우면 될 것 같은디..
+					   // 현우돈을 주마다 수금
+//		}
+//		System.out.println("현우"+hw);
+		
+		
+		
+		int hw = 0;
+		
+		for(int y=0; y<=400; y+=6) {
+			hw++;
+		}
+		System.out.println("현우"+hw);
+		
+		
+		
+		
+		
+		int week = 0;
+		for(int a=400;a>=0;a-=6) {
+			week++;
+		} System.out.println("몇 주?"+week);
+		
 	}
 		
 }
