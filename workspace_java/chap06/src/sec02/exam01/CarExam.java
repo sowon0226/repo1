@@ -6,7 +6,7 @@ public class CarExam {
 		//		   리턴타입 메소드이름 매개변수  변수명
 		// public static void main의 main은 자바에서 실행되는 함수를 찾기 때문에 중요함 ? (자동으로 실행됨)
  
-		Car myCar = new Car();
+		Car myCar = new Car();  
 		Car myCar2 = new Car(); // myCar2에 Carjava에 있는 Car(임팔라) 사옴 
 		
 		System.out.println(myCar.model);
