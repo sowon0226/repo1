@@ -34,9 +34,8 @@ public class Up {
 			}
 	}
 	}
-	void Up() {
-		System.out.println("시도 회수 : " +1);
-	}
+
+
 	void dowm() {
 		System.out.println("시도 회수 : " +2);
 	}
