@@ -10,3 +10,5 @@ public class HumanException extends Exception {
 		System.out.println("HumanException String 전달인자 생성자 실행");
 	}
 }
+// import java.lang; 
+// import java.lang.*;
