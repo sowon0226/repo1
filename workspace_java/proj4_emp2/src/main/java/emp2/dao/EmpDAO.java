@@ -64,7 +64,7 @@ public class EmpDAO {
 
                 empDTO.setJob( rs.getString("job") );
                 empDTO.setHireDate( rs.getDate("hiredate") );
-
+                
 
                 list.add(empDTO);
             }

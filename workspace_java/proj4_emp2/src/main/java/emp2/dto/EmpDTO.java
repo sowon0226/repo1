@@ -7,13 +7,20 @@ public class EmpDTO {
 	private Integer empno;
 	private String ename;
 	private String job;
-	private Integer mer;
+	private Integer mgr;
 	private Date hireDate;
 	private int sal;
 	private Integer comm;
 	private int deptno;
 	
+	private int rnum;
 	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public Integer getEmpno() {
 		return this.empno;
 	}
@@ -32,11 +39,11 @@ public class EmpDTO {
 	public void setJob(String job) {
 		this.job = job;
 	}
-	public Integer getMer() {
-		return mer;
+	public Integer getMgr() {
+		return mgr;
 	}
-	public void setMer(Integer mer) {
-		this.mer = mer;
+	public void setMgr(Integer mgr) {
+		this.mgr = mgr;
 	}
 	public Date getHireDate() {
 		return hireDate;
@@ -64,7 +71,7 @@ public class EmpDTO {
 	}
 	@Override
 	public String toString() {
-		return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mer=" + mer + ", hiedDate="
+		return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hiedDate="
 				+ hireDate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + "]";
 	}
 	
