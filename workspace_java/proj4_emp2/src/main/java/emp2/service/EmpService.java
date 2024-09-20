@@ -44,4 +44,13 @@ public class EmpService {
         EmpDAO empDAO = new EmpDAO();
         return empDAO.delete(tno);
     }
+    // 전달 받은 EmpDTO를
+    // DAO로 보내고
+    // DAO가 return한 EmpDTO를 반환한다
+    public EmpDTO loginCheck(EmpDTO empDTO) {
+    	EmpDAO empDAO = new EmpDAO();
+    	EmpDTO resultDTO = empDAO.selectLogin(empDTO);
+    	return resultDTO;
+    }
+    
 }

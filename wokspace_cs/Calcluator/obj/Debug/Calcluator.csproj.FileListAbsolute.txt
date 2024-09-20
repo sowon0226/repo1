@@ -1,0 +1,10 @@
+C:\workspace\wokspace_cs\Calcluator\bin\Debug\Calcluator.exe.config
+C:\workspace\wokspace_cs\Calcluator\bin\Debug\Calcluator.exe
+C:\workspace\wokspace_cs\Calcluator\bin\Debug\Calcluator.pdb
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.csproj.AssemblyReference.cache
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.Form1.resources
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.Properties.Resources.resources
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.csproj.GenerateResource.cache
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.csproj.CoreCompileInputs.cache
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.exe
+C:\workspace\wokspace_cs\Calcluator\obj\Debug\Calcluator.pdb

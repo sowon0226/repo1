@@ -33,7 +33,7 @@
 				<td>${emp.rnum }</td>
 				<td>${emp.empno }</td>
 				<td style="padding-left: ${emp.lv * 10}px;">
-					<c:if test="${emp.lv ne 1}">ㄴ</c:if>
+					<c:if test="${emp.lv ne 1}"></c:if>
 					${emp.ename }
 				</td>
 				<td>${emp.job }</td>
@@ -61,8 +61,8 @@
 	int lastPage = (int)Math.ceil( (double) totalCount / countPerPage );// ceil 올림
 	
 	// 한번에 보여줄 페이지의 개수
-	int countPerSection = 3;
-	// 페이지 섹션 위치
+	int countPerSection;
+
 	int position = (int) Math.ceil((double)pageNo / countPerSection);  // floor 내림
 	int sec_first = ((position -1) * countPerSection) + 1;
 	int sec_last = position * countPerSection;

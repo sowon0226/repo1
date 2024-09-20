@@ -13,6 +13,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div style = "text-alin : right">
+	
+	<c:if test="${ not empty loginDTO }">
+		${loginDTO.ename}님 환영합니다
+	</c:if>
+	<c:if test="${empty loginDTO }">
+		<a href="login.jsp">로그인</a>
+	</c:if>
+	
+</div>
 <form method="get" action="">
 사원 번호 조회 :<input type="number" name="empno" value="null">
 사원 이름 조회 :<input type="text" name="ename" >
