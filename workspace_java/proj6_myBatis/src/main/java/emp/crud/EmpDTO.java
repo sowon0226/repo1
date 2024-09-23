@@ -16,6 +16,7 @@ public class EmpDTO {
     private String keyword;
     private String searchType;
     private String checks;
+   
     
     public String getChecks() {
 		return checks;

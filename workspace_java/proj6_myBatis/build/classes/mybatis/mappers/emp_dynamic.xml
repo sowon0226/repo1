@@ -65,9 +65,44 @@ select
       </if>
       
       <if test="checks != null">
-      	and empno in(1,2,3,4)
+      	and empno in
+      	 	
+<!--       	 	xml의 foreach -->
+<!--       	 	item : 사용할 변수  foreach안에서 #{변수 명}으로 사용 가능하다 -->
+<!--       	 	collection : 반복될 배열 또는 list -->
+<!--       	 				 dto 나 map 안에 있으면 key나 필드명을 적음 -->
+<!--       	 				 parameterType에 배열이 전당되었다면 "array"list가 전달되었다면 "list" -->
+<!--       	 	open : 반복문이 시작 되면서 적어줌. -->
+<!--       	 	separator=","아이템이 하나 끝날때마다 넣어주는 구분자 -->
+<!--       	 	close : 반복문이 끝나면서 적어줌.			  -->
+      	 	
+      	<foreach itme="item" collection="checks" open="(" separator="," close=")">
+      		#{itme}
+      	</foreach>
       </if>
       
    </where>
+   <if test="orderType != null and orderType !='' " >
+<!--    		<if test="orderType == 'desc'"> -->
+<!--    			order by empno desc -->
+<!--    		</if> -->
+<!--    		<if test="orderType == 'esc'"> -->
+<!--    			order by empno esc -->
+<!--    		</if> -->
+<!-- 		oder by empno -->
+<!-- 		<if test= "orderType == 'desc'"> -->
+<!-- 			desc -->
+<!-- 		</if> -->
+
+<!-- 
+
+	#{} : 문자인경우 '' 붙여주고, 숫자인경우 그냥 사용
+	${} : 무조건 그냥 사용 (해킹의 위험이 있다. 따라서 where 조건같은데서 보단 order 같은 가벼운 곳애먼 사용하자)
+
+ -->
+
+		order by empno ${orderType}
+   </if>
+   
 </select>
 </mapper>

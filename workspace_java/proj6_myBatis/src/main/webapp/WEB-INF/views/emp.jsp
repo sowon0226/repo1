@@ -30,21 +30,16 @@
 		
 		<input type="hidden" name="oderType" value ="${oderType}">
 			<table border="1">
-				<caption>회원 목록 표시</caption>
+				<caption>회원 목록 표시 : display:none 으로 감춰놓자</caption>
 				<thead>
-					<tr>
+					<tr id="selectTh">
 					<td>
-						<input type="checkbox" name="check">
-					</td>
-						<th>사원번호</th>
-						<th>이름</th>
-						<th>직책</th>
-						<th>사수</th>
-						<th>입사일</th>
-						<th>급여</th>
-						<th>상여금</th>
-						<th>부서번호</th>
-						<th></th>
+					<th>선택</th>
+					<th id="empno">empno</th>
+					<th>ename</th>
+					<th>job</th>
+					<th>hireDate</th>
+					<th>sal</th>
 					</tr>
 				</thead>
 				<tbody>
