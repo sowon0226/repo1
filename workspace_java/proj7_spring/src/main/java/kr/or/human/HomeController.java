@@ -27,7 +27,7 @@ public class HomeController {
 	// Controller에 등록되어 있는 애들이 멥핑에 주소를 주고 실행시킬 수 있다 
 	// method = RequestMethod.GET은 메소드마다 다 붙일수 있음
 	public String home(Locale locale, Model model) {
-		// @RequestMapping을 사용하면 전달인자나 메소드? 에 다 들어갈 수 있다 
+		// @RequestMapping을 사용하면 메소드와 전달인자 에 다 들어갈 수 있다 
 		// 배열안에 있는 것들을 알아서 실행시켜줌
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
