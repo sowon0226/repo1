@@ -20,7 +20,14 @@ public class EmpDTO {
 	private String searchType;
 	private String[] checks;
 	private String orderType;
+	private int deleteEmp;
 	
+	public int getDeleteEmp() {
+		return deleteEmp;
+	}
+	public void setDeleteEmp(int deleteEmp) {
+		this.deleteEmp = deleteEmp;
+	}
 	public int getLv() {
 		return lv;
 	}

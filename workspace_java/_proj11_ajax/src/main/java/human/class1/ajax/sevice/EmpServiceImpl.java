@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import human.class1.ajax.dao.EmpDAO;
+import human.class1.ajax.dto.EmpDTO;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -20,5 +21,10 @@ public class EmpServiceImpl implements EmpService {
 		List<EmpDAO> list = empDAO.selectEmp();
 		
 		return list;
+	}
+	public int deleteEmp(EmpDTO dto) {
+		int result =empDAO.deleteEmp(dto);
+		return result;
+	
 	}
 }
